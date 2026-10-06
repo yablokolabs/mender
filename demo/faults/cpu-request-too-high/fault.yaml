@@ -7,6 +7,6 @@ signal: cluster
 cluster: true
 rebuild: false
 apply: |
-  sed -i 's|cpu: "100m"|cpu: "32"|' manifests/deploy.yaml
+  sed -i -e 's|cpu: "100m"|cpu: "32"|' -e 's|cpu: "1"|cpu: "32"|' manifests/deploy.yaml
 cleanup: |
   git checkout -- .

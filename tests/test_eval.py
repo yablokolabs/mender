@@ -83,6 +83,32 @@ def test_tier_cost_is_none_when_any_call_lacks_a_price() -> None:
     assert report.summary.cost_usd_by_tier["ultra"] is None
 
 
+def test_case_without_calls_does_not_poison_tier_cost() -> None:
+    """A case that never called a tier (e.g. inject failure) must not make the
+    tier's cost unknown — only an unpriced CALL does."""
+    no_calls = CaseResult(
+        fault_id="inject-failed",
+        category="scheduling",
+        status="inject-failed",
+        root_cause_correct=False,
+        verify_passed=False,
+        time_to_pr_ready_ms=None,
+    )
+    report = aggregate(
+        [_case("a"), no_calls, _case("b")],
+        fault_count=3,
+        started_at="t0",
+        finished_at="t1",
+        pr_mode="prepare",
+        settle_s=20,
+        sandbox_image="img",
+    )
+    summary = report.summary
+    assert summary.cost_usd_by_tier["nano"] == 0.02
+    assert summary.cost_usd_by_tier["ultra"] == 0.02
+    assert summary.cost_usd_by_tier["tavily"] is None
+
+
 def test_aggregate_empty_run_is_zero_not_crash() -> None:
     report = aggregate(
         [],

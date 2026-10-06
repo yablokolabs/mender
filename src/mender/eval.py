@@ -339,9 +339,20 @@ def aggregate(
     tokens: dict[str, int] = {}
     calls: dict[str, int] = {}
     for tier in tiers:
-        tier_costs = [case.cost_usd_by_tier.get(tier) for case in cases]
-        known = [c for c in tier_costs if c is not None]
-        cost[tier] = sum(known) if len(known) == len(tier_costs) else None
+        # A case that never called this tier contributes nothing; only a case
+        # that DID call it but has no price makes the whole tier unknown.
+        costs: list[float] = []
+        complete = True
+        for case in cases:
+            used = tier in case.cost_usd_by_tier or case.calls_by_tier.get(tier, 0) > 0
+            if not used:
+                continue
+            value = case.cost_usd_by_tier.get(tier)
+            if value is None:
+                complete = False
+                break
+            costs.append(value)
+        cost[tier] = sum(costs) if complete else None
         tokens[tier] = sum(case.tokens_by_tier.get(tier, 0) for case in cases)
         calls[tier] = sum(case.calls_by_tier.get(tier, 0) for case in cases)
 
