@@ -255,6 +255,14 @@ def cmd_eval(args: argparse.Namespace) -> int:
     return 0 if not summary.failures else 1
 
 
+def cmd_serve(args: argparse.Namespace) -> int:
+    from mender.serve import serve
+
+    config = load_config()
+    serve(config, host=args.host, port=args.port)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mender",
@@ -301,6 +309,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     evaluate.add_argument("--force", action="store_true", help="rerun cases with stored results")
     evaluate.set_defaults(func=cmd_eval)
+
+    server = sub.add_parser("serve", help="run Mender as an HTTP service")
+    server.add_argument("--host", default="127.0.0.1")
+    server.add_argument("--port", type=int, default=8080)
+    server.set_defaults(func=cmd_serve)
 
     return parser
 
