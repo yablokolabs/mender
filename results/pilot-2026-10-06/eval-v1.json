@@ -1,0 +1,126 @@
+{
+  "schema_version": "mender-eval-v1",
+  "started_at": "2026-10-06T16:38:57+00:00",
+  "finished_at": "2026-10-06T16:43:00+00:00",
+  "pr_mode": "prepare",
+  "settle_s": 25.0,
+  "sandbox_image": "mender-demo-test:latest",
+  "cases": [
+    {
+      "fault_id": "low-memory-limit",
+      "category": "resources",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "config_error",
+        "memory_limit",
+        "oomkilled",
+        "resource_quota"
+      ],
+      "expected_labels": [
+        "oomkilled",
+        "memory_limit",
+        "memory_config",
+        "resource_limit"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 29554.960422996373,
+      "case_wall_ms": 115320.54368499666,
+      "report_title": "checkout pod OOMKilled due to 64Mi memory limit below 96Mi startup cache requirement",
+      "cost_usd_by_tier": {
+        "nano": 0.00176568,
+        "ultra": 0.059734999999999996,
+        "tavily": null,
+        "super": 0.005703
+      },
+      "tokens_by_tier": {
+        "nano": 26389,
+        "ultra": 55877,
+        "tavily": 0,
+        "super": 16626
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-pilot/cases/low-memory-limit/out"
+    },
+    {
+      "fault_id": "parse-amount-bug",
+      "category": "app",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "memory_limit",
+        "oomkilled",
+        "probe_config"
+      ],
+      "expected_labels": [
+        "code_bug",
+        "logic_error",
+        "parse_error",
+        "wrong_amount"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 3,
+      "time_to_pr_ready_ms": 113748.28237999463,
+      "case_wall_ms": 113990.95693800336,
+      "report_title": "checkout pods CrashLoopBackOff due to OOM kills from insufficient memory limit for JVM-like workload",
+      "cost_usd_by_tier": {
+        "nano": 0.00224952,
+        "ultra": 0.071252,
+        "tavily": null,
+        "super": 0.0297093
+      },
+      "tokens_by_tier": {
+        "nano": 29047,
+        "ultra": 61178,
+        "tavily": 0,
+        "super": 67903
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 3
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-pilot/cases/parse-amount-bug/out"
+    }
+  ],
+  "summary": {
+    "faults_total": 23,
+    "cases_run": 2,
+    "root_cause_correct": 1,
+    "root_cause_accuracy": 0.5,
+    "fix_passed": 2,
+    "fix_pass_rate": 1.0,
+    "time_to_pr_ready_ms_median": 71651.6214014955,
+    "time_to_pr_ready_n": 2,
+    "cost_usd_by_tier": {
+      "nano": 0.0040152,
+      "super": 0.0354123,
+      "tavily": null,
+      "ultra": 0.130987
+    },
+    "tokens_by_tier": {
+      "nano": 55436,
+      "super": 84529,
+      "tavily": 0,
+      "ultra": 117055
+    },
+    "calls_by_tier": {
+      "nano": 2,
+      "super": 4,
+      "tavily": 6,
+      "ultra": 4
+    },
+    "failures": []
+  }
+}

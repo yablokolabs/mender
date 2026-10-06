@@ -19,7 +19,7 @@ CONFIG_PATH = os.environ.get("CONFIG_PATH", "/etc/app/config.yaml")
 EXPECTED_DB_SUFFIX = ".shop.svc.cluster.local"
 MIN_SECRET_LENGTH = 32
 ALLOWED_LOG_LEVELS = {"debug", "info", "warn", "error"}
-STARTUP_CACHE_BYTES = 96 * 1024 * 1024  # the "JVM heap" that OOMs a 64Mi limit
+STARTUP_CACHE_BYTES = 96 * 1024 * 1024  # simulated startup cache; the limit must fit it
 
 
 class ConfigError(RuntimeError):

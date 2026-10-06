@@ -137,6 +137,16 @@ def _evidence_manifests(case_repo: Path) -> dict[str, str]:
     }
 
 
+def _flush_events() -> None:
+    """Drop old events so a case's evidence cannot inherit a previous fault."""
+    cluster = os.environ.get("MENDER_CLUSTER", "mender")
+    _run_tool(
+        ["kubectl", "--context", f"kind-{cluster}", "delete", "events", "-n", "shop", "--all"],
+        cwd=Path.cwd(),
+        timeout_s=60,
+    )
+
+
 def _inject(demo_dir: Path, fault_id: str, *, mode: str) -> subprocess.CompletedProcess[str]:
     argv = ["python3", "inject.py", fault_id, "--demo-dir", str(demo_dir)]
     if mode == "cleanup":
@@ -157,7 +167,7 @@ def run_case(
     force: bool = False,
     progress: bool = True,
 ) -> CaseResult:
-    case_dir = work_root / "cases" / fault.id
+    case_dir = (work_root / "cases" / fault.id).resolve()
     out_dir = case_dir / "out"
     result_path = out_dir / "case-result.json"
 
@@ -183,6 +193,7 @@ def run_case(
 
     if progress:
         print(f"[eval] {fault.id}: injecting...", flush=True)
+    _flush_events()
     inject = _inject(demo_dir, fault.id, mode="apply")
     if inject.returncode != 0:
         error = f"inject failed: {(inject.stderr or inject.stdout)[-500:]}"
@@ -270,6 +281,7 @@ def run_case(
                 f"[eval] {fault.id}: cleanup problem: {cleanup.stderr[-300:]}",
                 flush=True,
             )
+        _flush_events()
 
     # Cost/token roll-up from this case's own ledger.
     for tier, totals in ledger.by_tier().items():

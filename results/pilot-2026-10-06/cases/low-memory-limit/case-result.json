@@ -1,0 +1,44 @@
+{
+  "fault_id": "low-memory-limit",
+  "category": "resources",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "config_error",
+    "memory_limit",
+    "oomkilled",
+    "resource_quota"
+  ],
+  "expected_labels": [
+    "oomkilled",
+    "memory_limit",
+    "memory_config",
+    "resource_limit"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 29554.960422996373,
+  "case_wall_ms": 115320.54368499666,
+  "report_title": "checkout pod OOMKilled due to 64Mi memory limit below 96Mi startup cache requirement",
+  "cost_usd_by_tier": {
+    "nano": 0.00176568,
+    "ultra": 0.059734999999999996,
+    "tavily": null,
+    "super": 0.005703
+  },
+  "tokens_by_tier": {
+    "nano": 26389,
+    "ultra": 55877,
+    "tavily": 0,
+    "super": 16626
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-pilot/cases/low-memory-limit/out"
+}

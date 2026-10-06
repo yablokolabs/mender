@@ -201,9 +201,13 @@ def cmd_eval(args: argparse.Namespace) -> int:
         faults = faults[: args.limit]
 
     stamp = time.strftime("%Y%m%d-%H%M%S")
-    work_root = Path(args.work_dir) if args.work_dir else Path("runs") / f"eval-{stamp}"
+    work_root = (
+        Path(args.work_dir).resolve()
+        if args.work_dir
+        else (Path("runs") / f"eval-{stamp}").resolve()
+    )
     work_root.mkdir(parents=True, exist_ok=True)
-    result_root = Path(args.out) if args.out else Path("results") / stamp
+    result_root = Path(args.out).resolve() if args.out else (Path("results") / stamp).resolve()
     repo_root = Path.cwd()
 
     cases = []

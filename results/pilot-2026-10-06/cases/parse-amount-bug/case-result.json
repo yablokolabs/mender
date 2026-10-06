@@ -1,0 +1,43 @@
+{
+  "fault_id": "parse-amount-bug",
+  "category": "app",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "memory_limit",
+    "oomkilled",
+    "probe_config"
+  ],
+  "expected_labels": [
+    "code_bug",
+    "logic_error",
+    "parse_error",
+    "wrong_amount"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 3,
+  "time_to_pr_ready_ms": 113748.28237999463,
+  "case_wall_ms": 113990.95693800336,
+  "report_title": "checkout pods CrashLoopBackOff due to OOM kills from insufficient memory limit for JVM-like workload",
+  "cost_usd_by_tier": {
+    "nano": 0.00224952,
+    "ultra": 0.071252,
+    "tavily": null,
+    "super": 0.0297093
+  },
+  "tokens_by_tier": {
+    "nano": 29047,
+    "ultra": 61178,
+    "tavily": 0,
+    "super": 67903
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 3
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-pilot/cases/parse-amount-bug/out"
+}
