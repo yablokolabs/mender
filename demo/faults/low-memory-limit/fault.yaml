@@ -7,6 +7,6 @@ signal: cluster
 cluster: true
 rebuild: false
 apply: |
-  sed -i 's/memory: 512Mi/memory: 64Mi/' manifests/deploy.yaml
+  sed -i 's/memory: 128Mi/memory: 32Mi/; s/memory: 512Mi/memory: 64Mi/' manifests/deploy.yaml
 cleanup: |
   git checkout -- .

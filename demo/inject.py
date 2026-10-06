@@ -46,16 +46,20 @@ def _bash(snippet: str, cwd: Path) -> int:
 
 def _kubectl_apply(demo_dir: Path) -> int:
     ctx = ["kubectl", "--context", CONTEXT]
-    for argv in (
-        [*ctx, "apply", "-f", "manifests/"],
-        [*ctx, "rollout", "restart", "deployment/checkout", "-n", "shop"],
-        [*ctx, "rollout", "status", "deployment/checkout", "-n", "shop", "--timeout=150s"],
-    ):
+    steps = [
+        ("apply", [*ctx, "apply", "-f", "manifests/"]),
+        ("restart", [*ctx, "rollout", "restart", "deployment/checkout", "-n", "shop"]),
+        (
+            "status",
+            [*ctx, "rollout", "status", "deployment/checkout", "-n", "shop", "--timeout=60s"],
+        ),
+    ]
+    for name, argv in steps:
         proc = _run(argv, cwd=demo_dir, check=False)
         if proc.returncode != 0:
             # A rollout that never becomes ready is itself the injected symptom.
-            sys.stderr.write(f"[inject] {argv[2]} returned {proc.returncode}: {proc.stderr[-400:]}\n")
-            if argv[2] == "apply":
+            sys.stderr.write(f"[inject] {name} returned {proc.returncode}: {proc.stderr[-400:]}\n")
+            if name == "apply":
                 return proc.returncode
     return 0
 
