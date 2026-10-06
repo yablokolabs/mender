@@ -50,7 +50,7 @@ select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 strict = true
 python_version = "3.12"
 mypy_path = "src"
-packages = ["mender"]
+files = ["src/mender", "tests"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

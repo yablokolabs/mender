@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import Any
 
 import httpx
 
@@ -21,8 +22,9 @@ def _config(**overrides: object) -> TavilyConfig:
     return TavilyConfig.model_validate(base)
 
 
-def _fixture_body() -> dict:
-    return json.loads((FIXTURES / "tavily_search_response.json").read_text())
+def _fixture_body() -> dict[str, Any]:
+    body: dict[str, Any] = json.loads((FIXTURES / "tavily_search_response.json").read_text())
+    return body
 
 
 def test_search_maps_results_to_citations(tmp_path: Path) -> None:
