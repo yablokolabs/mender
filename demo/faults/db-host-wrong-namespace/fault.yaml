@@ -1,0 +1,12 @@
+id: db-host-wrong-namespace
+title: Config map points the database at the wrong namespace
+category: config
+expected_labels: [db_config, config_value, healthcheck, wrong_namespace]
+files: [demo/manifests/configmap.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|db_host: orders-db.shop.svc.cluster.local|db_host: orders-db.default.svc.cluster.local|' manifests/configmap.yaml
+cleanup: |
+  git checkout -- .

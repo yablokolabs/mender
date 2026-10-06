@@ -1,0 +1,12 @@
+id: cpu-request-too-high
+title: CPU request exceeds the node capacity, pods stay Pending
+category: scheduling
+expected_labels: [resource_request, scheduling, pending, insufficient_cpu]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|cpu: "100m"|cpu: "32"|' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

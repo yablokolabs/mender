@@ -1,0 +1,12 @@
+id: healthcheck-bug
+title: Health check inverted — healthy database reported as broken
+category: app
+expected_labels: [code_bug, healthcheck, probe_failure, readiness_probe]
+files: [demo/app/service.py]
+signal: cluster
+cluster: true
+rebuild: true
+apply: |
+  sed -i 's|if not db_host.endswith(EXPECTED_DB_SUFFIX):|if db_host.endswith(EXPECTED_DB_SUFFIX):|' app/service.py
+cleanup: |
+  git checkout -- .

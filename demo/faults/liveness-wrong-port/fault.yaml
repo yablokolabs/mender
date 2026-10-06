@@ -1,0 +1,12 @@
+id: liveness-wrong-port
+title: Liveness probe targets a port nothing listens on
+category: probes
+expected_labels: [liveness_probe, probe_config, probe_port]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i '/livenessProbe:/,$ s|port: http|port: 9090|' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: checkout-config
+  namespace: shop
+data:
+  config.yaml: |
+    log_level: info
+  db_host: orders-db.shop.svc.cluster.local

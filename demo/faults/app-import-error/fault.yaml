@@ -1,0 +1,12 @@
+id: app-import-error
+title: Service imports a dependency that is not installed in the image
+category: app
+expected_labels: [import_error, module_not_found, code_bug, crash_loop]
+files: [demo/app/service.py]
+signal: cluster
+cluster: true
+rebuild: true
+apply: |
+  sed -i '1i import kubernetes_asyncio' app/service.py
+cleanup: |
+  git checkout -- .

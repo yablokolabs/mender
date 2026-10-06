@@ -1,0 +1,12 @@
+id: invalid-log-level
+title: Config map ships an invalid log level, service refuses to start
+category: config
+expected_labels: [config_value, invalid_config, log_level, crash_loop]
+files: [demo/manifests/configmap.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|log_level: info|log_level: [unclosed|' manifests/configmap.yaml
+cleanup: |
+  git checkout -- .

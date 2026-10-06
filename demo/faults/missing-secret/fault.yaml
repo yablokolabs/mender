@@ -1,0 +1,12 @@
+id: missing-secret
+title: Deployment references a secret that does not exist
+category: secret
+expected_labels: [missing_secret, secret_config, createcontainerconfigerror]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's/name: checkout-secrets/name: checkout-secrets-x/' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

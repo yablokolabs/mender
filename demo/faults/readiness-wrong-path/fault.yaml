@@ -1,0 +1,12 @@
+id: readiness-wrong-path
+title: Readiness probe points at a path the app does not serve
+category: probes
+expected_labels: [readiness_probe, probe_config, probe_path]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i '/readinessProbe:/,/livenessProbe:/ s|path: /healthz|path: /ready|' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

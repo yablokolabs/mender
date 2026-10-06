@@ -1,0 +1,12 @@
+id: env-name-typo
+title: DB_HOST environment variable misspelled, service refuses to start
+category: config
+expected_labels: [env_config, missing_env, env_var, crash_loop]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|name: DB_HOST|name: DB_HOSTS|' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

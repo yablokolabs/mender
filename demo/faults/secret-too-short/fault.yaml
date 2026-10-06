@@ -1,0 +1,12 @@
+id: secret-too-short
+title: Secret value too short for the app's validation rule
+category: secret
+expected_labels: [secret_value, secret_config, validation, crash_loop]
+files: [demo/manifests/secret.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|secret_key: ".*"|secret_key: "short"|' manifests/secret.yaml
+cleanup: |
+  git checkout -- .

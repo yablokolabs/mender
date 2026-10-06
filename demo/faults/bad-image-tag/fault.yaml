@@ -1,0 +1,12 @@
+id: bad-image-tag
+title: Deployment pins an image tag that does not exist
+category: images
+expected_labels: [image_tag, image_pull, imagepullbackoff, image_config]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|image: mender-demo-app:1.0.0|image: mender-demo-app:1.9.9  # release tag: 1.0.0 (the only published tag)|' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

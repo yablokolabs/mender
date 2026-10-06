@@ -1,0 +1,12 @@
+id: secret-key-ref-wrong
+title: Deployment reads a key that does not exist in the secret
+category: secret
+expected_labels: [secret_key, secret_config, createcontainerconfigerror, missing_key]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|key: secret_key|key: token|' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

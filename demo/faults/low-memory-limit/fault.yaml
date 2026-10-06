@@ -1,0 +1,12 @@
+id: low-memory-limit
+title: Container memory limit far below the 96Mi startup cache
+category: resources
+expected_labels: [oomkilled, memory_limit, memory_config, resource_limit]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's/memory: 512Mi/memory: 64Mi/' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

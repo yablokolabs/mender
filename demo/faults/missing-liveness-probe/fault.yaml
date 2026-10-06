@@ -1,0 +1,12 @@
+id: missing-liveness-probe
+title: Liveness probe removed entirely
+category: probes
+expected_labels: [probe_config, liveness_probe, missing_probe]
+files: [demo/manifests/deploy.yaml]
+signal: file
+cluster: true
+rebuild: false
+apply: |
+  sed -i '/^          livenessProbe:/,/^            periodSeconds: 10$/d' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

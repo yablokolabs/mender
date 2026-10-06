@@ -1,0 +1,12 @@
+id: replicas-zero
+title: Deployment scaled to zero, no pods serve traffic
+category: scaling
+expected_labels: [replica_count, scaling, replicas, no_pods]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|replicas: 2|replicas: 0|' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

@@ -1,0 +1,12 @@
+id: migration-sql-syntax
+title: Migration SQL no longer parses
+category: migration
+expected_labels: [migration_failure, sql_syntax, migration]
+files: [demo/migrations/001_init.sql]
+signal: file
+cluster: false
+rebuild: false
+apply: |
+  sed -i 's|CREATE TABLE orders (|CREATE TABLE orders (,|' migrations/001_init.sql
+cleanup: |
+  git checkout -- .

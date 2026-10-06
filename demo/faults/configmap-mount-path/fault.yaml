@@ -1,0 +1,12 @@
+id: configmap-mount-path
+title: Config volume mounted at the wrong path
+category: config
+expected_labels: [volume_mount, config_map, mount_path, config_not_found]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|mountPath: /etc/app|mountPath: /etc/config|' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

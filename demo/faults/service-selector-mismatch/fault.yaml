@@ -1,0 +1,12 @@
+id: service-selector-mismatch
+title: Service selector no longer matches the pod labels
+category: networking
+expected_labels: [service_selector, selector_mismatch, traffic_routing, no_endpoints]
+files: [demo/manifests/service.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i '/^spec:/,$ s|app: checkout|app: checkout-v2|' manifests/service.yaml
+cleanup: |
+  git checkout -- .

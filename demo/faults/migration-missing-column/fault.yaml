@@ -1,0 +1,12 @@
+id: migration-missing-column
+title: Migration drops the amount column the app reads
+category: migration
+expected_labels: [migration_failure, schema_mismatch, missing_column, migration]
+files: [demo/migrations/001_init.sql]
+signal: file
+cluster: false
+rebuild: false
+apply: |
+  sed -i '/amount REAL NOT NULL/d' migrations/001_init.sql
+cleanup: |
+  git checkout -- .

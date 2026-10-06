@@ -1,0 +1,12 @@
+id: parse-amount-bug
+title: parse_amount strips the decimal point, amounts come back 100x wrong
+category: app
+expected_labels: [code_bug, logic_error, parse_error, wrong_amount]
+files: [demo/app/service.py]
+signal: file
+cluster: false
+rebuild: false
+apply: |
+  sed -i 's|cleaned = str(value).strip().replace(",", "")|cleaned = str(value).strip().replace(",", "").replace(".", "")|' app/service.py
+cleanup: |
+  git checkout -- .

@@ -1,0 +1,12 @@
+id: service-port-mismatch
+title: Service targetPort does not reach the container port
+category: networking
+expected_labels: [port_config, service_port, target_port, traffic_routing]
+files: [demo/manifests/service.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|targetPort: http|targetPort: 80|' manifests/service.yaml
+cleanup: |
+  git checkout -- .

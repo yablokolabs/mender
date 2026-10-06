@@ -1,0 +1,12 @@
+id: cpu-limit-missing
+title: Container CPU limit removed
+category: resources
+expected_labels: [resource_limit, missing_limit, resources]
+files: [demo/manifests/deploy.yaml]
+signal: file
+cluster: true
+rebuild: false
+apply: |
+  sed -i '/^              cpu: "1"$/d' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .

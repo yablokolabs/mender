@@ -1,0 +1,12 @@
+id: configmap-key-typo
+title: Deployment mounts a config map key that does not exist
+category: config
+expected_labels: [config_key, config_map, volume_mount, container_creating]
+files: [demo/manifests/deploy.yaml]
+signal: cluster
+cluster: true
+rebuild: false
+apply: |
+  sed -i 's|key: config.yaml|key: config.yamll|' manifests/deploy.yaml
+cleanup: |
+  git checkout -- .
