@@ -1,0 +1,46 @@
+# Mender configuration. API keys come from the environment (.env) — never from this file.
+router:
+  base_url: https://api.tokenfactory.nebius.com/v1/
+  request_timeout_s: 120
+  max_retries: 1
+  retry_backoff_s: 2
+  tiers:
+    nano:
+      model: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+      temperature: 0.0
+      max_tokens: 8192
+      price:
+        input_per_m: 0.06
+        output_per_m: 0.24
+        source: >-
+          Nebius publishes no per-model price table; $0.06 in / $0.24 out per 1M tokens
+          is the Nebius rate reported by third-party aggregators (pricepertoken.com,
+          getmaxim.ai, metatext.ai, typingmind.com), retrieved 2026-10-06.
+    ultra:
+      model: nvidia/Nemotron-3-Ultra-550b-a55b
+      temperature: 0.0
+      max_tokens: 16384
+      price:
+        input_per_m: 1.0
+        output_per_m: 3.0
+        source: models.dev Nebius provider entry, retrieved 2026-10-06.
+    super:
+      model: nvidia/nemotron-3-super-120b-a12b
+      temperature: 0.2
+      max_tokens: 16384
+      price:
+        input_per_m: 0.30
+        output_per_m: 0.90
+        source: models.dev Nebius provider entry, retrieved 2026-10-06.
+
+tavily:
+  max_results: 5
+  search_depth: advanced
+  timeout_s: 30
+  max_retries: 3
+  retry_backoff_s: 1
+
+sandbox:
+  image: python:3.12-slim
+  max_retries: 3
+  timeout_s: 900
