@@ -1,0 +1,29 @@
+# Secrets — never commit
+.env
+
+# Project narratives — committed only on explicit request
+project_story.md
+feedback_answers.md
+
+# Original logo copy at repo root (canonical copy lives in assets/)
+/mender-logo.png
+
+# Agent tooling installed for development (not part of the shipped project)
+.agents/
+.claude/
+skills-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+
+# Local scratch (eval results in results/ ARE committed)
+runs/
+*.log
