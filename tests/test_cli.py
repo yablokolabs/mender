@@ -10,7 +10,7 @@ def test_parser_exposes_expected_commands() -> None:
         action for action in parser._actions if action.__class__.__name__ == "_SubParsersAction"
     ]
     assert actions, "expected subparsers"
-    assert set(actions[0].choices or {}) == {"diagnose", "fix", "run", "pr"}
+    assert set(actions[0].choices or {}) == {"diagnose", "fix", "run", "pr", "eval"}
 
 
 def test_run_parser_requires_pipeline_args() -> None:

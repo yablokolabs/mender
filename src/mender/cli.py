@@ -181,6 +181,76 @@ def load_run_meta(out_dir: Path) -> dict[str, object]:
     return data
 
 
+def cmd_eval(args: argparse.Namespace) -> int:
+    from mender.eval import aggregate, load_faults, now_ts, run_case, write_report
+
+    config = load_config()
+    require_env("NEBIUS_API_KEY")
+    require_env("TAVILY_API_KEY")
+    started_at = now_ts()
+
+    faults = load_faults(Path("demo"))
+    if args.faults:
+        wanted = {fid.strip() for fid in args.faults.split(",") if fid.strip()}
+        unknown = wanted - {fault.id for fault in faults}
+        if unknown:
+            _log(f"unknown fault ids: {sorted(unknown)}")
+            return 2
+        faults = [fault for fault in faults if fault.id in wanted]
+    if args.limit:
+        faults = faults[: args.limit]
+
+    stamp = time.strftime("%Y%m%d-%H%M%S")
+    work_root = Path(args.work_dir) if args.work_dir else Path("runs") / f"eval-{stamp}"
+    work_root.mkdir(parents=True, exist_ok=True)
+    result_root = Path(args.out) if args.out else Path("results") / stamp
+    repo_root = Path.cwd()
+
+    cases = []
+    for index, fault in enumerate(faults, start=1):
+        _log(f"case {index}/{len(faults)}: {fault.id}")
+        cases.append(
+            run_case(
+                fault,
+                repo_root=repo_root,
+                work_root=work_root,
+                result_root=result_root,
+                config=config,
+                settle_s=args.settle,
+                pr_mode=args.pr_mode,
+                sandbox_image=args.sandbox_image,
+                force=args.force,
+            )
+        )
+
+    report = aggregate(
+        cases,
+        fault_count=len(load_faults(Path("demo"))),
+        started_at=started_at,
+        finished_at=now_ts(),
+        pr_mode=args.pr_mode,
+        settle_s=args.settle,
+        sandbox_image=args.sandbox_image,
+    )
+    path = write_report(report, result_root)
+    summary = report.summary
+    _log(f"report: {path}")
+    print(
+        json.dumps(
+            {
+                "cases_run": summary.cases_run,
+                "root_cause_accuracy": summary.root_cause_accuracy,
+                "fix_pass_rate": summary.fix_pass_rate,
+                "time_to_pr_ready_ms_median": summary.time_to_pr_ready_ms_median,
+                "cost_usd_by_tier": summary.cost_usd_by_tier,
+                "failures": summary.failures,
+            },
+            indent=2,
+        )
+    )
+    return 0 if not summary.failures else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mender",
@@ -214,6 +284,19 @@ def build_parser() -> argparse.ArgumentParser:
     pr.add_argument("--workdir", default=None, help="override the recorded workdir")
     pr.add_argument("--pr-mode", choices=["prepare", "gh"], default="gh")
     pr.set_defaults(func=cmd_pr)
+
+    evaluate = sub.add_parser("eval", help="run Mender against every injected fault")
+    evaluate.add_argument("--faults", default=None, help="comma-separated fault ids (default: all)")
+    evaluate.add_argument("--limit", type=int, default=None, help="run only the first N faults")
+    evaluate.add_argument("--settle", type=float, default=20.0, help="seconds to wait for symptoms")
+    evaluate.add_argument("--pr-mode", choices=["prepare", "gh"], default="prepare")
+    evaluate.add_argument("--sandbox-image", default="mender-demo-test:latest")
+    evaluate.add_argument("--out", default=None, help="results directory (default results/<ts>)")
+    evaluate.add_argument(
+        "--work-dir", default=None, help="scratch directory (default runs/eval-<ts>)"
+    )
+    evaluate.add_argument("--force", action="store_true", help="rerun cases with stored results")
+    evaluate.set_defaults(func=cmd_eval)
 
     return parser
 
