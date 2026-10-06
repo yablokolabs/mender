@@ -6,6 +6,7 @@ import subprocess
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from pathlib import Path
 
 from pydantic import BaseModel, Field
 
@@ -25,15 +26,20 @@ class CommandResult:
 CommandRunner = Callable[[list[str]], CommandResult]
 
 
-def subprocess_runner(argv: list[str]) -> CommandResult:
-    """Run a command for real; used for kubectl and gh."""
+def run_in(argv: list[str], *, cwd: Path | None = None) -> CommandResult:
+    """Run a command for real (kubectl, git, gh); injectable in tests."""
     try:
-        proc = subprocess.run(argv, capture_output=True, text=True, timeout=120)
+        proc = subprocess.run(argv, capture_output=True, text=True, timeout=120, cwd=cwd)
     except (OSError, subprocess.TimeoutExpired) as exc:
         return CommandResult(argv=argv, exit_code=127, stdout="", stderr=str(exc))
     return CommandResult(
         argv=argv, exit_code=proc.returncode, stdout=proc.stdout, stderr=proc.stderr
     )
+
+
+def run_here(argv: list[str]) -> CommandResult:
+    """Zero-argument runner adapter for CommandRunner slots (ambient cwd)."""
+    return run_in(argv)
 
 
 class ClusterEvidence(BaseModel):

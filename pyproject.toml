@@ -27,6 +27,9 @@ dependencies = [
 Homepage = "https://github.com/yablokolabs/mender"
 Repository = "https://github.com/yablokolabs/mender"
 
+[project.scripts]
+mender = "mender.cli:main"
+
 [dependency-groups]
 dev = [
     "pytest>=8",
