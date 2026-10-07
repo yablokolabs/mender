@@ -15,107 +15,93 @@ itself.**
 <summary>Architecture diagram (inline SVG)</summary>
 
 <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" style="max-width:100%; height:auto; border:1px solid #bfc0c0; border-radius:8px;">
-  <defs>
-    <style>
-      .paper { fill: #f5f5f5; }
-      .ink { fill: #2d3142; }
-      .muted { fill: #4f5d75; }
-      .soft { fill: #7a8399; }
-      .accent { fill: #eb6c36; }
-      .link { fill: #2e5aa8; }
-      .rule { stroke: #bfc0c0; stroke-width: 1; }
-      .node { fill: #ffffff; stroke: #2d3142; stroke-width: 1; rx: 8; ry: 8; }
-      .node-accent { fill: #ffffff; stroke: #eb6c36; stroke-width: 1.5; rx: 8; ry: 8; }
-      .node-paper { fill: #ececec; stroke: #bfc0c0; stroke-width: 1; rx: 8; ry: 8; }
-      .arrow { stroke: #4f5d75; stroke-width: 1; fill: none; }
-      .arrow-link { stroke: #2e5aa8; stroke-width: 1; fill: none; }
-      .label { font-size: 12px; fill: #2d3142; font-weight: 600; }
-      .sublabel { font-size: 9px; fill: #7a8399; font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace; }
-      .eyebrow { font-size: 8px; fill: #7a8399; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
-      .accent-label { font-size: 12px; fill: #2d3142; font-weight: 600; }
-      .title { font-size: 14px; fill: #2d3142; font-weight: 600; }
-    </style>
-  </defs>
+  <rect width="900" height="520" fill="#f5f5f5"/>
+  <text x="32" y="34" font-size="14" font-weight="600" fill="#2d3142">Mender architecture</text>
+  <text x="32" y="48" font-size="10" fill="#7a8399">Incident → triage → root cause → patch → sandbox → PR. A human reviews; Mender never merges.</text>
 
-  <rect class="paper" width="900" height="520" rx="0"/>
-  <text x="32" y="34" class="title">Mender architecture</text>
-  <text x="32" y="48" class="soft" style="font-size:10px;">Incident → triage → root cause → patch → sandbox → PR. A human reviews; Mender never merges.</text>
+  <!-- Kubernetes cluster column -->
+  <text x="32" y="86" font-size="8" fill="#7a8399" letter-spacing="0.18em" font-weight="500">Kubernetes cluster</text>
+  <rect x="32" y="96" width="240" height="300" fill="#ececec" stroke="#bfc0c0" stroke-width="1" rx="8" ry="8"/>
+  <text x="44" y="116" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">kind · namespace shop</text>
+  <rect x="48" y="128" width="208" height="64" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="60" y="148" font-size="12" font-weight="600" fill="#2d3142">checkout service</text>
+  <text x="60" y="164" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">Deployment + Service + 21 invariant checks</text>
+  <rect x="48" y="204" width="208" height="52" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="60" y="222" font-size="12" font-weight="600" fill="#2d3142">fault injection</text>
+  <text x="60" y="238" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">demo/inject.py · apply/cleanup per fault.yaml</text>
+  <rect x="48" y="268" width="208" height="56" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="60" y="286" font-size="12" font-weight="600" fill="#2d3142">evidence: events, logs, manifests</text>
+  <text x="60" y="302" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">kubectl get/describe · pod status · container logs</text>
 
-  <text x="32" y="86" class="eyebrow">Kubernetes cluster</text>
-  <rect class="node-paper" x="32" y="96" width="240" height="300"/>
-  <text x="44" y="116" class="sublabel">kind · namespace shop</text>
-  <rect class="node" x="48" y="128" width="208" height="64"/>
-  <text x="60" y="148" class="label">checkout service</text>
-  <text x="60" y="164" class="sublabel">Deployment + Service + 21 invariant checks</text>
-  <rect class="node" x="48" y="204" width="208" height="52"/>
-  <text x="60" y="222" class="label">fault injection</text>
-  <text x="60" y="238" class="sublabel">demo/inject.py · apply/cleanup per fault.yaml</text>
-  <rect class="node" x="48" y="268" width="208" height="56"/>
-  <text x="60" y="286" class="label">evidence: events, logs, manifests</text>
-  <text x="60" y="302" class="sublabel">kubectl get/describe · pod status · container logs</text>
+  <!-- Mender agent column (focal, accent border) -->
+  <text x="332" y="86" font-size="8" fill="#7a8399" letter-spacing="0.18em" font-weight="500">Mender agent</text>
+  <rect x="332" y="96" width="236" height="300" fill="#ffffff" stroke="#eb6c36" stroke-width="1.5" rx="8" ry="8"/>
+  <text x="344" y="116" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">src/mender · Python 3.12 · mypy strict</text>
+  <rect x="348" y="128" width="204" height="44" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="360" y="144" font-size="12" font-weight="600" fill="#2d3142">triage  (nano)</text>
+  <text x="360" y="160" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">evidence → signals + suspects</text>
+  <rect x="348" y="184" width="204" height="52" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="360" y="200" font-size="12" font-weight="600" fill="#2d3142">Tavily search</text>
+  <text x="360" y="216" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">advanced depth · ranked sources · cited</text>
+  <rect x="348" y="248" width="204" height="44" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="360" y="264" font-size="12" font-weight="600" fill="#2d3142">root cause  (ultra)</text>
+  <text x="360" y="280" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">evidence + web sources → report</text>
+  <rect x="348" y="304" width="204" height="44" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="360" y="320" font-size="12" font-weight="600" fill="#2d3142">patch  (super)</text>
+  <text x="360" y="336" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">allowed files only · path escapes rejected</text>
 
-  <text x="332" y="86" class="eyebrow">Mender agent</text>
-  <rect class="node-accent" x="332" y="96" width="236" height="300"/>
-  <text x="344" y="116" class="sublabel">src/mender · Python 3.12 · mypy strict</text>
-  <rect class="node" x="348" y="128" width="204" height="44"/>
-  <text x="360" y="144" class="accent-label">triage  (nano)</text>
-  <text x="360" y="160" class="sublabel">evidence → signals + suspects</text>
-  <rect class="node" x="348" y="184" width="204" height="52"/>
-  <text x="360" y="200" class="label">Tavily search</text>
-  <text x="360" y="216" class="sublabel">advanced depth · ranked sources · cited</text>
-  <rect class="node" x="348" y="248" width="204" height="44"/>
-  <text x="360" y="264" class="accent-label">root cause  (ultra)</text>
-  <text x="360" y="280" class="sublabel">evidence + web sources → report</text>
-  <rect class="node" x="348" y="304" width="204" height="44"/>
-  <text x="360" y="320" class="accent-label">patch  (super)</text>
-  <text x="360" y="336" class="sublabel">allowed files only · path escapes rejected</text>
+  <!-- Nebius Token Factory column -->
+  <text x="632" y="86" font-size="8" fill="#7a8399" letter-spacing="0.18em" font-weight="500">Nebius Token Factory</text>
+  <rect x="632" y="96" width="236" height="80" fill="#ececec" stroke="#bfc0c0" stroke-width="1" rx="8" ry="8"/>
+  <text x="644" y="116" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">OpenAI-compatible API</text>
+  <text x="644" y="132" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">https://api.tokenfactory.nebius.com/v1/</text>
+  <rect x="648" y="140" width="204" height="36" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="660" y="155" font-size="11" font-weight="600" fill="#2d3142">nano · triage · $0.06/$0.24</text>
+  <rect x="648" y="184" width="204" height="36" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="660" y="199" font-size="11" font-weight="600" fill="#2d3142">ultra · root cause · $1.00/$3.00</text>
+  <rect x="648" y="228" width="204" height="36" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="660" y="243" font-size="11" font-weight="600" fill="#2d3142">super · patch + repair · $0.30/$0.90</text>
 
-  <text x="632" y="86" class="eyebrow">Nebius Token Factory</text>
-  <rect class="node-paper" x="632" y="96" width="236" height="80"/>
-  <text x="644" y="116" class="sublabel">OpenAI-compatible API</text>
-  <text x="644" y="132" class="sublabel">https://api.tokenfactory.nebius.com/v1/</text>
-  <rect class="node" x="648" y="140" width="204" height="36"/>
-  <text x="660" y="155" class="label" style="font-size:11px;">nano · triage · $0.06/$0.24</text>
-  <rect class="node" x="648" y="184" width="204" height="36"/>
-  <text x="660" y="199" class="label" style="font-size:11px;">ultra · root cause · $1.00/$3.00</text>
-  <rect class="node" x="648" y="228" width="204" height="36"/>
-  <text x="660" y="243" class="label" style="font-size:11px;">super · patch + repair · $0.30/$0.90</text>
+  <!-- Sandbox column -->
+  <text x="632" y="290" font-size="8" fill="#7a8399" letter-spacing="0.18em" font-weight="500">Sandbox</text>
+  <rect x="632" y="300" width="236" height="72" fill="#ececec" stroke="#bfc0c0" stroke-width="1" rx="8" ry="8"/>
+  <text x="644" y="318" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">Docker · --network none</text>
+  <rect x="648" y="330" width="204" height="34" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="660" y="348" font-size="11" font-weight="600" fill="#2d3142">runs test command · max_retries 3</text>
 
-  <text x="632" y="290" class="eyebrow">Sandbox</text>
-  <rect class="node-paper" x="632" y="300" width="236" height="72"/>
-  <text x="644" y="318" class="sublabel">Docker · --network none</text>
-  <rect class="node" x="648" y="330" width="204" height="34"/>
-  <text x="660" y="348" class="label" style="font-size:11px;">runs test command · max_retries 3</text>
+  <!-- Pull request column -->
+  <text x="632" y="386" font-size="8" fill="#7a8399" letter-spacing="0.18em" font-weight="500">Pull request</text>
+  <rect x="632" y="396" width="236" height="92" fill="#ffffff" stroke="#2d3142" stroke-width="1" rx="8" ry="8"/>
+  <text x="644" y="414" font-size="12" font-weight="600" fill="#2d3142">gh pr: root cause · evidence · diff</text>
+  <text x="644" y="430" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">test results · Tavily sources</text>
+  <text x="644" y="446" font-size="10" fill="#7a8399">Never merges — human reviews.</text>
 
-  <text x="632" y="386" class="eyebrow">Pull request</text>
-  <rect class="node" x="632" y="396" width="236" height="92"/>
-  <text x="644" y="414" class="label">gh pr: root cause · evidence · diff</text>
-  <text x="644" y="430" class="sublabel">test results · Tavily sources</text>
-  <text x="644" y="446" class="soft" style="font-size:10px;">Never merges — human reviews.</text>
+  <!-- Arrows -->
+  <path d="M 272 180 C 300 180, 320 180, 328 180" fill="none" stroke="#2e5aa8" stroke-width="1"/>
+  <text x="296" y="174" font-size="8" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">evidence</text>
+  <path d="M 456 210 C 490 210, 520 210, 560 210" fill="none" stroke="#2e5aa8" stroke-width="1"/>
+  <path d="M 560 210 L 632 132" fill="none" stroke="#2e5aa8" stroke-width="1"/>
+  <text x="500" y="204" font-size="8" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">queries</text>
+  <path d="M 632 150 C 560 150, 520 150, 456 210" fill="none" stroke="#2e5aa8" stroke-width="1"/>
+  <text x="540" y="144" font-size="8" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">sources</text>
+  <path d="M 452 172 L 452 184" fill="none" stroke="#4f5d75" stroke-width="1"/>
+  <path d="M 452 232 L 452 248" fill="none" stroke="#4f5d75" stroke-width="1"/>
+  <path d="M 452 292 L 452 304" fill="none" stroke="#4f5d75" stroke-width="1"/>
+  <path d="M 456 264 C 490 264, 520 264, 560 264" fill="none" stroke="#2e5aa8" stroke-width="1"/>
+  <path d="M 560 264 L 632 150" fill="none" stroke="#2e5aa8" stroke-width="1"/>
+  <text x="500" y="258" font-size="8" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">queries</text>
+  <path d="M 556 326 L 632 320" fill="none" stroke="#2e5aa8" stroke-width="1"/>
+  <text x="590" y="316" font-size="8" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">patch</text>
+  <path d="M 750 368 L 750 396" fill="none" stroke="#2e5aa8" stroke-width="1"/>
+  <text x="756" y="384" font-size="8" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">verified</text>
 
-  <path class="arrow-link" d="M 272 180 C 300 180, 320 180, 328 180"/>
-  <text x="296" y="174" class="sublabel" style="font-size:8px;">evidence</text>
-  <path class="arrow-link" d="M 456 210 C 490 210, 520 210, 560 210"/>
-  <path class="arrow-link" d="M 560 210 L 632 132"/>
-  <text x="500" y="204" class="sublabel" style="font-size:8px;">queries</text>
-  <path class="arrow-link" d="M 632 150 C 560 150, 520 150, 456 210"/>
-  <text x="540" y="144" class="sublabel" style="font-size:8px;">sources</text>
-  <path class="arrow" d="M 452 172 L 452 184"/>
-  <path class="arrow" d="M 452 232 L 452 248"/>
-  <path class="arrow" d="M 452 292 L 452 304"/>
-  <path class="arrow-link" d="M 456 264 C 490 264, 520 264, 560 264"/>
-  <path class="arrow-link" d="M 560 264 L 632 150"/>
-  <text x="500" y="258" class="sublabel" style="font-size:8px;">queries</text>
-  <path class="arrow-link" d="M 556 326 L 632 320"/>
-  <text x="590" y="316" class="sublabel" style="font-size:8px;">patch</text>
-  <path class="arrow-link" d="M 750 368 L 750 396"/>
-  <text x="756" y="384" class="sublabel" style="font-size:8px;">verified</text>
-
-  <rect class="node-paper" x="32" y="420" width="836" height="72"/>
-  <text x="44" y="440" class="eyebrow">Usage ledger (append-only)</text>
-  <text x="44" y="458" class="sublabel">Every model call + Tavily call recorded: tokens, reasoning tokens, latency, cost per tier, failures.</text>
-  <text x="44" y="474" class="sublabel">Reports and eval rows trace back to what they actually cost — no invented numbers.</text>
+  <!-- Usage ledger footer -->
+  <rect x="32" y="420" width="836" height="72" fill="#ececec" stroke="#bfc0c0" stroke-width="1" rx="8" ry="8"/>
+  <text x="44" y="440" font-size="8" fill="#7a8399" letter-spacing="0.18em" font-weight="500">Usage ledger (append-only)</text>
+  <text x="44" y="458" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">Every model call + Tavily call recorded: tokens, reasoning tokens, latency, cost per tier, failures.</text>
+  <text x="44" y="474" font-size="9" fill="#7a8399" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace">Reports and eval rows trace back to what they actually cost — no invented numbers.</text>
 </svg>
+
 
 </details>
 
