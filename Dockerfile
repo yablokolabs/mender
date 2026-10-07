@@ -16,6 +16,9 @@ WORKDIR /app
 COPY pyproject.toml README.md LICENSE ./
 COPY src ./src
 RUN pip install --no-cache-dir .
+# `mender serve` reads mender.yaml from the working directory at startup. The file
+# holds no secrets; mount a different one at /app/mender.yaml to change the config.
+COPY mender.yaml ./
 
 ENV PYTHONUNBUFFERED=1
 EXPOSE 8080
