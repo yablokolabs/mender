@@ -23,9 +23,8 @@
 	--color-muted: #93a3bd;
 	--color-on-accent: #0b1220;
 
-	/* Status colours. Red and amber appear only where the service is broken. */
+	/* Red appears only where the service is broken. */
 	--color-danger: #ff6b6b;
-	--color-warning: #f2b84b;
 
 	/* Typography */
 	--font-display: "Inter", system-ui, sans-serif;

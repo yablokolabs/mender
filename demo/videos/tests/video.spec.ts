@@ -222,7 +222,7 @@ test("the timeline is as long as the narration, so no words are cut", async () =
 	expect(timeline).toBeLessThanOrEqual(narration + 1);
 });
 
-test("the committed MP4 is the 1080p render of this timeline, with the narration", async () => {
+test("the committed MP4 has an audio stream, a 1080p frame and the length of the timeline", async () => {
 	const video = probe(renderedVideo);
 	const kinds = video.streams.map((stream) => stream.codec_type);
 	expect(kinds).toContain("audio");

@@ -8,18 +8,20 @@ text widths that a reader of the README sees.
 from __future__ import annotations
 
 import math
-import re
+import os
 import shutil
 import struct
 import subprocess
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
-from itertools import combinations, pairwise
+from itertools import combinations
 from pathlib import Path
 
 import pytest
 
-SVG_PATH = Path(__file__).resolve().parents[1] / "assets" / "arch-diagram.svg"
+ASSETS = Path(__file__).resolve().parents[1] / "assets"
+SVG_PATH = ASSETS / "arch-diagram.svg"
+PNG_PATH = ASSETS / "arch-diagram.png"
 SVG_NS = "http://www.w3.org/2000/svg"
 
 # Labels are exported at this zoom so that a width is known to a quarter of a unit.
@@ -31,10 +33,10 @@ CANVAS_MARGIN = 8.0
 PADDING_X = 6.0
 PADDING_Y = 3.0
 TOLERANCE = 0.5
-CURVE_STEPS = 16
 
+# CI installs the renderer, so a missing renderer there is a failure, not a skip.
 pytestmark = pytest.mark.skipif(
-    shutil.which("rsvg-convert") is None,
+    shutil.which("rsvg-convert") is None and "CI" not in os.environ,
     reason="rsvg-convert (package librsvg2-bin) is not installed",
 )
 
@@ -121,55 +123,6 @@ def _number(element: ET.Element, name: str) -> float:
     return float(element.get(name, "0"))
 
 
-def _path_segments(d: str) -> list[Segment]:
-    tokens = re.findall(r"[A-Za-z]|-?\d*\.?\d+(?:[eE]-?\d+)?", d)
-    segments: list[Segment] = []
-    start: Point = (0.0, 0.0)
-    here: Point = (0.0, 0.0)
-    index = 0
-
-    def take(count: int) -> list[float]:
-        nonlocal index
-        values = [float(token) for token in tokens[index : index + count]]
-        index += count
-        return values
-
-    while index < len(tokens):
-        command = tokens[index]
-        index += 1
-        if command == "M":
-            x, y = take(2)
-            start = here = (x, y)
-        elif command in "LHV":
-            if command == "L":
-                x, y = take(2)
-            elif command == "H":
-                x, y = take(1)[0], here[1]
-            else:
-                x, y = here[0], take(1)[0]
-            segments.append((here, (x, y)))
-            here = (x, y)
-        elif command == "C":
-            x1, y1, x2, y2, x, y = take(6)
-            previous = here
-            for step in range(1, CURVE_STEPS + 1):
-                t = step / CURVE_STEPS
-                u = 1 - t
-                point = (
-                    u**3 * here[0] + 3 * u * u * t * x1 + 3 * u * t * t * x2 + t**3 * x,
-                    u**3 * here[1] + 3 * u * u * t * y1 + 3 * u * t * t * y2 + t**3 * y,
-                )
-                segments.append((previous, point))
-                previous = point
-            here = (x, y)
-        elif command == "Z":
-            segments.append((here, start))
-            here = start
-        else:
-            raise AssertionError(f"path command {command!r} is not supported by this check: {d}")
-    return segments
-
-
 def _length_inside(segment: Segment, box: Box) -> float:
     """Length of the part of `segment` that lies inside `box` (Liang-Barsky clipping)."""
     (x1, y1), (x2, y2) = segment
@@ -234,12 +187,10 @@ def diagram(tmp_path_factory: pytest.TempPathFactory) -> Diagram:
                     (_number(element, "x2"), _number(element, "y2")),
                 )
             )
-        elif tag == "polyline":
-            numbers = [float(n) for n in re.findall(r"-?\d*\.?\d+", element.get("points", ""))]
-            points = list(zip(numbers[0::2], numbers[1::2], strict=True))
-            connectors.extend(pairwise(points))
-        elif tag == "path" and element.get("fill") == "none":
-            connectors.extend(_path_segments(element.get("d", "")))
+        else:
+            assert tag not in {"path", "polyline"}, (
+                f"<{tag}> is not read by this check; draw each connector as a <line>"
+            )
         for child in element:
             walk(child, style)
 
@@ -344,3 +295,14 @@ def test_connectors_do_not_cross_boxes_or_labels(diagram: Diagram) -> None:
         }
     )
     assert not problems, "\n".join(problems)
+
+
+def test_the_png_shows_the_whole_canvas(diagram: Diagram) -> None:
+    width, height = _png_size(PNG_PATH)
+    canvas_ratio = (diagram.canvas.right - diagram.canvas.left) / (
+        diagram.canvas.bottom - diagram.canvas.top
+    )
+    assert width >= 1600, "the README image must stay sharp on a high-density display"
+    assert width / height == pytest.approx(canvas_ratio, rel=0.005), (
+        "assets/arch-diagram.png does not have the shape of the SVG canvas; run `make diagram`"
+    )

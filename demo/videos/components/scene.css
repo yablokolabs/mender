@@ -120,7 +120,7 @@
 }
 
 .mender-scene .stage.funnel {
-	grid-template-columns: 1.3fr auto 1fr;
+	grid-template-columns: 1fr auto 1.15fr;
 	align-items: center;
 }
 
@@ -525,4 +525,22 @@
 
 .mender-scene.centered .promise {
 	font-size: 54px;
+}
+
+.mender-scene .list-title {
+	font-size: 26px;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--color-accent);
+}
+
+.mender-scene .findings {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 0;
+	list-style: none;
+	font-family: var(--font-mono);
+	font-size: 28px;
 }

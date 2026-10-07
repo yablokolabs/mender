@@ -42,14 +42,21 @@ of each segment: `npx videowright script --write`.
   and had no audio. Cause: `el` used inside `play()`, one timing entry for 3 to 6 beats,
   CSS transitions (the render clock drives only `element.animate()`), a logo URL that
   returned 404.
-- Segments moved to `segments/<id>/` (documented layout) and rewritten on shared
-  `components/scene.ts` and `components/scene.css`. Timeline entries are `{ id, transition }`.
-- All on-screen values come from `results/2026-10-06/cases/low-memory-limit/`.
+- Segments moved to `segments/<id>/` (documented layout). Each one is a `defineScene()`
+  call from `components/scene.ts`, styled by `components/scene.css`. Timeline entries are
+  `{ id, transition }`.
+- All on-screen values come from the 2026-10-06 eval run of `low-memory-limit`: the
+  committed artefacts in `results/2026-10-06/cases/low-memory-limit/`, and that run's
+  `triage.json` and `patch.json` (not committed) for the triage output and the diff.
+- The 25 s in the outro is the pipeline time (triage to prepared PR). It does not include
+  fault injection, the settle wait or evidence collection.
 - Style changed from onme to mender. Fonts come from `@fontsource` packages.
 - Narration: `audio/originals/voiceovers/v1/` (Lily). Track v1 is normalised to -16 LUFS.
-  Timing is computed from the word timestamps, snapped to 60 fps frames, and written to
-  `audio/tracks/v1/track.ts` and to each segment's `advances`.
-- A new voice needs: `generate.sh`, a new track, new timing in both places, a new render.
+  `scripts/sync_audio.py` builds the track, computes the timing from the word timestamps,
+  snaps it to 60 fps frames, and writes it to `audio/tracks/v1/track.ts` and to each
+  segment's `advances`.
+- A new voice or new words need: `VOICE_ID=... generate.sh`, `python3 scripts/sync_audio.py`,
+  `npm test`, a new render. New words also need new cue words in `sync_audio.py`.
 - `npm test` drives the real player in a browser. `videowright render` exits 0 even when a
   segment throws, so run the tests before each render.
-- Render: `npx videowright render demo --output ../mender-demo.mp4` (96.4 s).
+- Render: `npx videowright render demo --output ../mender-demo.mp4` (93.9 s).

@@ -1,17 +1,9 @@
-import type { PlayerContext } from "videowright";
+import { defineSegment, type Segment } from "videowright";
+import "./scene.css";
 
 const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
 const REVEAL_MS = 500;
 const STAGGER_MS = 90;
-
-const FONT_FACES = [
-	'400 36px "Inter"',
-	'500 36px "Inter"',
-	'600 36px "Inter"',
-	'700 36px "Inter"',
-	'400 32px "JetBrains Mono"',
-	'500 32px "JetBrains Mono"',
-];
 
 const STAGES = [
 	"Evidence",
@@ -22,9 +14,16 @@ const STAGES = [
 	"Pull request",
 ];
 
-/** Resolves when each font face of the style is loaded, so no frame shows a fallback font. */
-export function fontsReady(): Promise<unknown> {
-	return Promise.all(FONT_FACES.map((face) => document.fonts.load(face)));
+interface SceneSpec {
+	id: string;
+	advances: number[];
+	voiceover: string;
+	html: string;
+}
+
+/** Resolves when each font face that the style declares is loaded, so no frame shows a fallback font. */
+function fontsReady(): Promise<unknown> {
+	return Promise.all([...document.fonts].map((face) => face.load()));
 }
 
 function revealBeat(root: HTMLElement, beat: number): void {
@@ -47,22 +46,40 @@ function revealBeat(root: HTMLElement, beat: number): void {
 }
 
 /**
- * Plays a scene whose elements carry `data-beat="0"`, `data-beat="1"` and so on.
- * Beat 0 shows at once. Each later beat waits for the next advance, so a scene with
+ * A segment that shows `html` and reveals its `data-beat` groups in order.
+ * Beat 0 shows at once. Each later beat waits for the next advance, so markup with
  * beats 0 to N needs N + 1 entries in `advances`: N reveals and the end of the segment.
  */
-export async function playBeats(
-	ctx: PlayerContext,
-	root: HTMLElement,
-): Promise<void> {
-	const beats = [...root.querySelectorAll<HTMLElement>("[data-beat]")].map(
-		(element) => Number(element.dataset.beat),
-	);
-	revealBeat(root, 0);
-	for (let beat = 1; beat <= Math.max(...beats); beat++) {
-		await ctx.waitForNext();
-		revealBeat(root, beat);
-	}
+export function defineScene(spec: SceneSpec): Segment {
+	let host: HTMLElement | null = null;
+	return defineSegment({
+		id: spec.id,
+		advances: spec.advances,
+		voiceover: spec.voiceover,
+
+		async mount(el) {
+			host = el;
+			el.innerHTML = spec.html;
+			await fontsReady();
+		},
+
+		async play(ctx) {
+			const root = host;
+			if (!root) return;
+			const beats = [...root.querySelectorAll<HTMLElement>("[data-beat]")].map(
+				(element) => Number(element.dataset.beat),
+			);
+			revealBeat(root, 0);
+			for (let beat = 1; beat <= Math.max(...beats); beat++) {
+				await ctx.waitForNext();
+				revealBeat(root, beat);
+			}
+		},
+
+		unmount() {
+			host = null;
+		},
+	});
 }
 
 /**

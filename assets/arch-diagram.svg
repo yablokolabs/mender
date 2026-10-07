@@ -2,7 +2,8 @@
 <!--
   Source of assets/arch-diagram.png. Render it with `make diagram`.
   tests/test_arch_diagram.py measures this file with rsvg-convert. Keep these rules:
-  write absolute coordinates (no transform), put one line of text in each <text>,
+  write absolute coordinates (no transform), draw each connector as a <line>, put one
+  line of text in each <text>,
   and set font-size and text-anchor as attributes on the <text> or on a parent <g>.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" width="960" height="700"
@@ -122,7 +123,7 @@
     <text x="714" y="327">ultra tier · $1.00 / $3.00</text>
     <text x="714" y="409">super tier · $0.30 / $0.90</text>
     <text x="714" y="573">a human reviews and merges</text>
-    <text x="46" y="667">Every model call and every Tavily call is recorded: tokens, latency and cost per tier.</text>
+    <text x="46" y="667">Every model call and every Tavily call is recorded: tokens, latency, cost per model tier.</text>
   </g>
 
   <!-- Connector labels -->

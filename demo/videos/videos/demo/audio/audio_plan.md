@@ -26,6 +26,11 @@ ffmpeg -y \
 
 ## Log
 
+## 2026-10-07 13:50 -- Rendered v1 again (three narration lines corrected) and synced timing
+**Change:** New voiceover audio from generate.sh; track and timing rebuilt with scripts/sync_audio.py.
+**Why:** A review found that three lines claimed more than the eval run shows.
+**Render:** audio/tracks/v1/track.mp3
+
 ## 2026-10-07 11:41 -- Synced timing to v1
 **Segments:** intro, setup, fault, triage, diagnosis, patch, sandbox, pr, outro
 **Total duration:** 96.4s

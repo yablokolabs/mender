@@ -23,14 +23,15 @@ from the logo (`videos/demo/assets/mender-logo.png`) and matches the README diag
   is broken.
 - **Type.** Inter for headings and body, JetBrains Mono for commands, file paths, log
   lines and numbers that come from a tool. The fonts are npm packages imported by
-  `tokens.css`; a segment must wait for `fontsReady()` in `mount`.
+  `tokens.css`; `defineScene()` waits for them before a scene plays.
 - **Sizes at 1080p.** Headline 72px or more, body 36px or more, terminal text 30px or
   more, small labels 24px or more. No text below 20px.
 - **Layout.** One subject in each scene. Content uses the full width inside the safe
   area (`--safe-x`, `--safe-y`). Panels use `--color-surface` with a `--color-border`
   line and `--radius-lg` corners.
-- **Real data only.** Each number, command, log line and citation on screen comes from a
-  committed artefact in `results/`. Do not invent values.
+- **Real data only.** Each number, command, log line and citation on screen comes from an
+  eval run: the committed artefacts in `results/`, and that run's `triage.json` and
+  `patch.json` for the triage output and the diff. Do not invent values.
 - **Glyphs.** The fonts are the latin subset. Do not type arrows or check marks as
   characters; draw them with CSS or inline SVG.
 

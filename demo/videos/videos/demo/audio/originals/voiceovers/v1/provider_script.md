@@ -18,7 +18,7 @@ Then we inject a fault. The memory limit drops to sixty-four megabytes, below wh
 
 <break time="0.7s" />
 
-Mender collects the evidence. The nano model cuts eleven thousand tokens of logs and events down to a short list of signals and suspects.
+Mender collects the evidence. The nano model reads about eleven thousand tokens of logs and events, and returns a short list of signals and suspects.
 
 <break time="0.7s" />
 
@@ -30,7 +30,7 @@ The super model then writes the patch. It can only touch the files it was given.
 
 <break time="0.7s" />
 
-Before anything is proposed, the patch runs in a Docker container with no network. Twenty-one of twenty-one checks pass, on the first attempt.
+Before anything is proposed, the tests run on the patched files in a Docker container with no network. Twenty-one of twenty-one checks pass, on the first attempt.
 
 <break time="0.7s" />
 
@@ -38,4 +38,4 @@ Mender prepares the pull request: root cause, evidence, the diff, the test resul
 
 <break time="0.7s" />
 
-From broken service to a verified fix in twenty-five seconds. Mender. It never merges without you.
+From evidence to a verified fix in twenty-five seconds. Mender. It never merges without you.
