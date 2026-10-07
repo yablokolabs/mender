@@ -117,12 +117,21 @@ def validate_patch(patch: Patch, allowed: set[str]) -> None:
             raise PatchError(f"patch path outside allowed set: {path}")
 
 
+def _resolve_within(workdir: Path, path: str) -> Path:
+    """Resolve `path` under `workdir`, rejecting symlinks that escape it."""
+    target = workdir / path
+    resolved = target.resolve()
+    if not resolved.is_relative_to(workdir.resolve()):
+        raise PatchError(f"patch path escapes workdir via symlink: {path}")
+    return target
+
+
 def apply_patch(patch: Patch, workdir: Path, allowed: set[str]) -> list[str]:
     """Write the patch into `workdir`; returns paths whose content actually changed."""
     validate_patch(patch, allowed)
     changed: list[str] = []
     for patch_file in patch.files:
-        target = workdir / patch_file.path
+        target = _resolve_within(workdir, patch_file.path)
         before = target.read_text(encoding="utf-8") if target.is_file() else None
         if before == patch_file.content:
             continue
@@ -133,10 +142,17 @@ def apply_patch(patch: Patch, workdir: Path, allowed: set[str]) -> list[str]:
 
 
 def read_files(workdir: Path, paths: list[str]) -> dict[str, str]:
-    """Read the current contents of the given repo-relative paths."""
+    """Read the current contents of the given repo-relative paths.
+
+    Symlinks pointing outside `workdir` are skipped — their contents must not
+    leak into the model prompt, and they are not safe write targets.
+    """
     contents: dict[str, str] = {}
+    workdir_resolved = workdir.resolve()
     for path in paths:
         candidate = workdir / path
+        if candidate.is_symlink() and not candidate.resolve().is_relative_to(workdir_resolved):
+            continue
         if candidate.is_file():
             contents[path] = candidate.read_text(encoding="utf-8")
     return contents

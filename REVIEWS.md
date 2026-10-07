@@ -37,3 +37,38 @@ External reviewers: **codex**, **opencode**, **atomic-agent**. Their output is a
 ### codex (`codex exec`)
 
 Not run: the local Codex install returned a usage-limit error (quota exhausted until 2026-10-09). Will retry before the release review; if still unavailable, it will be recorded as "review not obtained" rather than passed.
+
+## Round 2 — phases 2–5 code review (post-build, 2026-10-06)
+
+Prompt: `runs/review/prompt.txt`. Diff reviewed: `runs/review/phase2-5.diff`.
+
+### opencode (`opencode run --pure --auto`)
+
+Verdict: **fix-first** (recorded in `runs/review/opencode.txt`).
+
+| # | Finding | Decision |
+|---|---|---|
+| 1 | `pr.py` `git add -A` stages the whole worktree into the Mender branch | **Applied** — `build_payload` now passes `files=list(patch.paths)`; `open_pr` stages only `git add -- <files>` (fallback to `-A` only when the files list is empty); staged check uses `git diff --cached --quiet` instead of `status --porcelain`. |
+| 2 | pipeline.py writes the model patch to the real repo before verification, never rolled back | **Not yet applied** — verify-failed rows keep the unverified patch on disk in the case clone (which is discarded after each eval case), so the eval does not leak it; in the live `mender run` path a verify-failed still leaves the patched workdir in place. Accepted as a known limitation for this release; the eval case workdirs are ephemeral, so the current failures (`migration-missing-column`, `parse-amount-bug`) are caught by `validate_patch` before the sandbox, not by a rollback. |
+| 3 | patching.py `read_files`/`apply_patch` follow symlinks escaping the workdir | **Applied** — `_resolve_within()` rejects symlinks that resolve outside `workdir`; `read_files` skips escaping symlinks; `apply_patch` goes through `_resolve_within`. |
+| 4 | cli.py `main` catches only `(PipelineError, FileNotFoundError, ValueError)`; `MissingCredential`/`EvalError`/`ModelError`/`PatchError` are `RuntimeError` → raw traceback; serve.py has the same gap | **Applied** — both `cli.py` and `serve.py` now catch `(PipelineError, MissingCredential, EvalError, ModelError, PatchError)` explicitly (plus `FileNotFoundError`/`ValueError` in the CLI). |
+
+### atomic-agent (`echo … | atomic-agent run --no-approval`)
+
+Recorded in `runs/review/atomic.txt`. Several claims were checked against the source;
+the following were **not reproducible** and are recorded as hallucinations:
+
+| # | Claimed finding | Verification |
+|---|---|---|
+| 2 | "elif thought in pr.py" unreachable branch | **False** — no such branch exists in `src/mender/pr.py`. |
+| 4 | `progress` argument is unused in pipeline | **False** — `progress` is used (print statements gated on it at multiple sites in `pipeline.py`). |
+| 6 | no integration/contract test for the LH-bound pipeline / repair feedback test missing | **False** — a repair-loop test exists (`test_verify_repairs_with_feedback_then_passes` in `tests/test_sandbox.py`). |
+| 7 | empty-assistant-echo issue not handled | **False** — the modelio repair path already folds the nudge into the system message and drops empty assistant replies (commit `de04a02`). |
+
+The remaining atomic suggestions (apply_patch exception handling, graceful shutdown in serve.py, CommandResult attribution, JSON-balanced scan edge cases, config parse edge cases) are lower priority and were not applied in this round; several are partially covered by existing behavior (e.g. `apply_patch` failures surface through `PatchError` from `validate_patch`/`_resolve_within` rather than being silently swallowed).
+
+### codex
+
+Still blocked by the local Codex usage limit (quota exhausted until 2026-10-09 at the
+time of this review round). Not obtained for Round 2. Will retry before release; if still
+unavailable, recorded as "review not obtained".

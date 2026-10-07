@@ -7,7 +7,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field
 
-from mender.patching import Patch, apply_patch
+from mender.patching import Patch, PatchError, apply_patch
 from mender.sandbox.runner import SandboxResult, SandboxRunner
 
 MAX_FEEDBACK_CHARS = 4_000
@@ -75,7 +75,11 @@ def verify_with_repair(
             break
         failure_feedback = result.output_tail[-MAX_FEEDBACK_CHARS:]
         patch = repair(failure_feedback)
-        changed = apply_patch(patch, workdir, allowed_paths)
+        try:
+            changed = list(set(changed) | set(apply_patch(patch, workdir, allowed_paths)))
+        except PatchError as exc:
+            changed.append(f"## patch repair error (no further retries): {exc}")
+            break
 
     return VerifyResult(
         passed=False,

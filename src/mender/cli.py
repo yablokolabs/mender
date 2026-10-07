@@ -9,12 +9,14 @@ import sys
 import time
 from pathlib import Path
 
-from mender.config import MenderConfig, load_config, load_env, require_env
+from mender.config import MenderConfig, MissingCredential, load_config, load_env, require_env
 from mender.diagnosis import run_diagnosis
+from mender.eval import EvalError, load_faults
 from mender.evidence import ClusterEvidence, EvidenceCollector, run_here
+from mender.patching import PatchError
 from mender.pipeline import PipelineError, load_run, run_pipeline
 from mender.pr import build_payload, open_pr
-from mender.router.client import ModelClient
+from mender.router.client import ModelClient, ModelError
 from mender.router.usage import UsageLedger
 from mender.sandbox.runner import DockerRunner
 from mender.tavily import TavilyClient
@@ -181,22 +183,30 @@ def load_run_meta(out_dir: Path) -> dict[str, object]:
     return data
 
 
+def _demo_dir() -> Path:
+    """The demo fault catalogue: cwd/demo when run from the repo, else package-relative."""
+    local = Path.cwd() / "demo"
+    if (local / "faults").is_dir():
+        return local
+    return Path(__file__).resolve().parents[2] / "demo"
+
+
 def cmd_eval(args: argparse.Namespace) -> int:
-    from mender.eval import aggregate, load_faults, now_ts, run_case, write_report
+    from mender.eval import aggregate, now_ts, run_case, write_report
 
     config = load_config()
     require_env("NEBIUS_API_KEY")
     require_env("TAVILY_API_KEY")
     started_at = now_ts()
 
-    faults = load_faults(Path("demo"))
+    faults = load_faults(_demo_dir())
     if args.faults:
-        wanted = {fid.strip() for fid in args.faults.split(",") if fid.strip()}
-        unknown = wanted - {fault.id for fault in faults}
+        wanted_set = {fid.strip() for fid in args.faults.split(",") if fid.strip()}
+        unknown = wanted_set - {fault.id for fault in faults}
         if unknown:
             _log(f"unknown fault ids: {sorted(unknown)}")
             return 2
-        faults = [fault for fault in faults if fault.id in wanted]
+        faults = [fault for fault in faults if fault.id in wanted_set]
     if args.limit:
         faults = faults[: args.limit]
 
@@ -229,7 +239,7 @@ def cmd_eval(args: argparse.Namespace) -> int:
 
     report = aggregate(
         cases,
-        fault_count=len(load_faults(Path("demo"))),
+        fault_count=len(faults),
         started_at=started_at,
         finished_at=now_ts(),
         pr_mode=args.pr_mode,
@@ -324,7 +334,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return int(args.func(args))
-    except (PipelineError, FileNotFoundError, ValueError) as exc:
+    except (PipelineError, MissingCredential, EvalError, ModelError, PatchError) as exc:
+        # Known operational failures: one honest line, not a traceback.
+        _log(f"error ({type(exc).__name__}): {exc}")
+        return 1
+    except (FileNotFoundError, ValueError) as exc:
         _log(f"error: {exc}")
         return 1
 

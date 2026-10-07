@@ -141,7 +141,17 @@ def _flush_events() -> None:
     """Drop old events so a case's evidence cannot inherit a previous fault."""
     cluster = os.environ.get("MENDER_CLUSTER", "mender")
     _run_tool(
-        ["kubectl", "--context", f"kind-{cluster}", "delete", "events", "-n", "shop", "--all"],
+        [
+            "kubectl",
+            "--context",
+            f"kind-{cluster}",
+            "delete",
+            "events",
+            "-n",
+            "shop",
+            "--all",
+            "--ignore-not-found",
+        ],
         cwd=Path.cwd(),
         timeout_s=60,
     )
@@ -199,6 +209,8 @@ def run_case(
         error = f"inject failed: {(inject.stderr or inject.stdout)[-500:]}"
         if progress:
             print(f"[eval] {fault.id}: {error}", flush=True)
+        # Drop stale events so a failed inject does not leak into the next case.
+        _flush_events()
         result = CaseResult(
             fault_id=fault.id,
             category=fault.category,
@@ -209,6 +221,7 @@ def run_case(
             out_dir=str(out_dir),
         )
         _finish_case(result, out_dir, result_root, demo_dir, fault)
+        _flush_events()
         return result
 
     if fault.signal == "cluster" and settle_s > 0:
@@ -282,6 +295,11 @@ def run_case(
                 flush=True,
             )
         _flush_events()
+        # Sandbox containers that time out keep running past subprocess.run's
+        # timeout. Kill any named containers whose PID is still alive so a
+        # stuck container cannot leak into the next case.
+        for c in DockerRunner._sandbox_containers():
+            _run_tool(["docker", "kill", c], cwd=Path.cwd(), timeout_s=30)
 
     # Cost/token roll-up from this case's own ledger.
     for tier, totals in ledger.by_tier().items():

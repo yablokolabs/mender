@@ -26,6 +26,9 @@ def _report() -> RootCauseReport:
         )
         for r in results[:2]
     ]
+
+    # Newly-built citations are unnumbered at construction time; the report
+    # numbers them when rendering markdown/pr lines.
     return RootCauseReport(
         service="checkout",
         namespace="shop",
@@ -115,21 +118,40 @@ class RecordingRunner:
 
 def test_prepare_mode_branches_and_commits(tmp_path: Path) -> None:
     payload = _payload()
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    # The staged-only `git add -- <files>` path needs the file to exist and be
+    # tracked so that it actually stages a change; otherwise `git add` exits 0
+    # but stages nothing and the commit is skipped.
+    (repo / "deploy.yaml").write_text("memory: 64Mi\n")
+    import subprocess
+
+    subprocess.run(["git", "init", "-q"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "config", "user.email", "t@t"], cwd=repo, check=True, capture_output=True
+    )
+    subprocess.run(["git", "config", "user.name", "t"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(["git", "add", "deploy.yaml"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(["git", "commit", "-q", "-m", "init"], cwd=repo, check=True, capture_output=True)
+
     runner = RecordingRunner(
         {
             "rev-parse --abbrev-ref": (0, "main\n", ""),
             "status --porcelain": (0, " M deploy.yaml\n", ""),
+            "diff --cached --quiet": (1, "", ""),
         }
     )
-    result = open_pr(payload, tmp_path, tmp_path / "pr-body.md", mode="prepare", runner=runner)
+    result = open_pr(payload, repo, repo / "pr-body.md", mode="prepare", runner=runner)
     assert result.error is None
     assert result.opened is False
     assert result.branch == payload.branch
-    assert (tmp_path / "pr-body.md").read_text() == payload.body
+    assert (repo / "pr-body.md").read_text() == payload.body
 
     joined = [" ".join(call) for call in runner.calls]
     assert any("checkout -b" in c for c in joined)
-    assert any("git add -A" in c for c in joined)
+    # Only the patch's own files are staged; never a blanket `git add -A`.
+    assert any(c.startswith("git add -- ") for c in joined)
+    assert not any("git add -A" in c for c in joined)
     commit_calls = [c for c in joined if c.startswith("git commit -m")]
     assert len(commit_calls) == 1
     # Commit subject is the plain title: no trailers, no attribution.
@@ -140,12 +162,31 @@ def test_prepare_mode_branches_and_commits(tmp_path: Path) -> None:
 
 def test_prepare_mode_without_changes_skips_commit(tmp_path: Path) -> None:
     payload = _payload()
-    runner = RecordingRunner(
-        {"rev-parse --abbrev-ref": (0, "main\n", ""), "status --porcelain": (0, "", "")}
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    (repo / "deploy.yaml").write_text("memory: 64Mi\n")
+    import subprocess
+
+    subprocess.run(["git", "init", "-q"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "config", "user.email", "t@t"], cwd=repo, check=True, capture_output=True
     )
-    result = open_pr(payload, tmp_path, tmp_path / "pr-body.md", mode="prepare", runner=runner)
+    subprocess.run(["git", "config", "user.name", "t"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(["git", "add", "deploy.yaml"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(["git", "commit", "-q", "-m", "init"], cwd=repo, check=True, capture_output=True)
+
+    runner = RecordingRunner(
+        {
+            "rev-parse --abbrev-ref": (0, "main\n", ""),
+            "status --porcelain": (0, "", ""),
+            "diff --cached --quiet": (0, "", ""),
+        }
+    )
+    result = open_pr(payload, repo, repo / "pr-body.md", mode="prepare", runner=runner)
     assert result.error is None
     assert not any(call[:2] == ["git", "commit"] for call in runner.calls)
+    # No staged changes → the staged check must run.
+    assert any("diff --cached --quiet" in " ".join(call) for call in runner.calls)
 
 
 def test_not_a_repo_returns_error(tmp_path: Path) -> None:
@@ -158,6 +199,19 @@ def test_not_a_repo_returns_error(tmp_path: Path) -> None:
 
 def test_gh_mode_pushes_and_creates_pr(tmp_path: Path) -> None:
     payload = _payload()
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    (repo / "deploy.yaml").write_text("memory: 64Mi\n")
+    import subprocess
+
+    subprocess.run(["git", "init", "-q"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "config", "user.email", "t@t"], cwd=repo, check=True, capture_output=True
+    )
+    subprocess.run(["git", "config", "user.name", "t"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(["git", "add", "deploy.yaml"], cwd=repo, check=True, capture_output=True)
+    subprocess.run(["git", "commit", "-q", "-m", "init"], cwd=repo, check=True, capture_output=True)
+
     runner = RecordingRunner(
         {
             "rev-parse --abbrev-ref": (0, "main\n", ""),
@@ -168,9 +222,10 @@ def test_gh_mode_pushes_and_creates_pr(tmp_path: Path) -> None:
                 "Creating pull request...\nhttps://github.com/x/y/pull/1\n",
                 "",
             ),
+            "diff --cached --quiet": (1, "", ""),
         }
     )
-    result = open_pr(payload, tmp_path, tmp_path / "pr-body.md", mode="gh", runner=runner)
+    result = open_pr(payload, repo, repo / "pr-body.md", mode="gh", runner=runner)
     assert result.opened is True
     assert result.url == "https://github.com/x/y/pull/1"
     joined = [" ".join(call) for call in runner.calls]

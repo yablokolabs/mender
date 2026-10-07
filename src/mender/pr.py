@@ -24,6 +24,7 @@ class PRPayload(BaseModel):
     branch: str
     base: str
     body: str
+    files: list[str] = Field(default_factory=list)
 
 
 class PROpenResult(BaseModel):
@@ -68,7 +69,7 @@ def build_payload(
         )
         for a in verify.attempt_log
     )
-    sources = "\n".join(citation.pr_line() for citation in report.sources)
+    sources = "\n".join(citation.pr_line(number=i + 1) for i, citation in enumerate(report.sources))
     if not sources:
         sources = "- (Tavily returned no results)"
     refs = [f"- {ref}" for ref in report.evidence_refs] or ["- (none recorded)"]
@@ -113,6 +114,7 @@ def build_payload(
         branch=branch_name(evidence.service, report),
         base=base,
         body=body,
+        files=list(patch.paths),
     )
 
 
@@ -147,7 +149,10 @@ def open_pr(
             body_path=str(body_path),
             error=f"not a git repository: {head.stderr.strip()[:200]}",
         )
-    base = head.stdout.strip() or payload.base
+    base = head.stdout.strip()
+    if base in {"", "HEAD"}:
+        # Detached HEAD: fall back to the payload's configured base branch.
+        base = payload.base
     if base == payload.branch:
         notes.append("already on the Mender branch; reusing it")
     else:
@@ -161,7 +166,13 @@ def open_pr(
                 error=f"git checkout -b failed: {created.stderr.strip()[:200]}",
             )
 
-    add = run(["git", "add", "-A"], workdir)
+    # Stage ONLY the files Mender is allowed to change. A bare `git add -A`
+    # would sweep unrelated work-in-progress (and, in a repo without a
+    # .gitignore, credentials) into the Mender branch.
+    if payload.files:
+        add = run(["git", "add", "--", *payload.files], workdir)
+    else:
+        add = run(["git", "add", "-A"], workdir)
     if add.exit_code != 0:
         return PROpenResult(
             mode=mode,
@@ -171,8 +182,8 @@ def open_pr(
             error=f"git add failed: {add.stderr.strip()[:200]}",
         )
 
-    status = run(["git", "status", "--porcelain"], workdir)
-    if not status.stdout.strip():
+    staged = run(["git", "diff", "--cached", "--quiet"], workdir)
+    if staged.exit_code == 0:
         notes.append("no file changes to commit")
     else:
         commit = run(["git", "commit", "-m", payload.title], workdir)
@@ -241,10 +252,8 @@ def open_pr(
             body_path=str(body_path),
             error=f"gh pr create failed: {create.stderr.strip()[:200]}",
         )
-    url = next(
-        (line.strip() for line in reversed(create.stdout.splitlines()) if "http" in line),
-        None,
-    )
+    url_match = re.search(r"https://\S+/pull/\d+", create.stdout)
+    url = url_match.group(0) if url_match else None
     return PROpenResult(
         mode=mode,
         opened=True,

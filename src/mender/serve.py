@@ -17,11 +17,12 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 
-from mender.config import MenderConfig, require_env
+from mender.config import MenderConfig, MissingCredential, require_env
 from mender.diagnosis import run_diagnosis
 from mender.evidence import ClusterEvidence, EvidenceCollector, run_here
+from mender.patching import PatchError
 from mender.pipeline import PipelineError, run_pipeline
-from mender.router.client import ModelClient
+from mender.router.client import ModelClient, ModelError
 from mender.router.usage import UsageLedger
 from mender.sandbox.runner import DockerRunner
 from mender.tavily import TavilyClient
@@ -133,8 +134,11 @@ def make_handler(config: MenderConfig) -> type[BaseHTTPRequestHandler]:
                 self._send(400, {"error": str(exc)})
             except json.JSONDecodeError:
                 self._send(400, {"error": "invalid JSON body"})
-            except (PipelineError, ValueError) as exc:
-                self._send(500, {"error": str(exc)})
+            except (PipelineError, MissingCredential, ModelError, PatchError) as exc:
+                # Known operational failures: a clean 500, not a traceback.
+                self._send(500, {"error": f"{type(exc).__name__}: {exc}"})
+            except ValueError as exc:
+                self._send(400, {"error": str(exc)})
             except Exception as exc:
                 self._send(500, {"error": f"{type(exc).__name__}: {exc}"})
 

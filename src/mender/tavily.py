@@ -22,10 +22,14 @@ class Citation:
     score: float | None
     query: str
 
-    def markdown(self) -> str:
+    def markdown(self, *, number: int | None = None) -> str:
+        if number is not None:
+            return f"[{number}] [{self.title}]({self.url}) — {self.snippet}"
         return f"- [{self.title}]({self.url}) — {self.snippet}"
 
-    def pr_line(self) -> str:
+    def pr_line(self, *, number: int | None = None) -> str:
+        if number is not None:
+            return f"[{number}] {self.title}: {self.url}"
         return f"- {self.title}: {self.url}"
 
 
@@ -74,27 +78,62 @@ class TavilyClient:
         citations: list[Citation] = []
 
         for attempt in range(attempts):
+            response: httpx.Response | None = None
+            response_err: str | None = None
             try:
                 response = self._client.post("/search", json=payload, headers=headers)
-                if response.status_code == 200:
+            except (httpx.HTTPError, ValueError) as exc:
+                response_err = f"{type(exc).__name__}: {exc}"
+            if response_err:
+                last_error = response_err
+                if attempt < attempts - 1:
+                    self._sleep(self._config.retry_backoff_s * (2**attempt))
+                continue
+
+            # Response body parsing is outside the network-retry try block — a
+            # bad JSON scaffold shape is a permanent error, not a transient one.
+            if response is not None and response.status_code == 200:
+                try:
                     body = response.json()
-                    citations = [
-                        Citation(
-                            title=str(item.get("title", "")),
-                            url=str(item.get("url", "")),
-                            snippet=str(item.get("content", item.get("snippet", ""))),
-                            score=float(item["score"]) if item.get("score") is not None else None,
-                            query=query,
-                        )
-                        for item in body.get("results", [])
-                    ]
-                    last_error = None
+                except ValueError as exc:
+                    last_error = f"bad HTTP response body: {exc}"
                     break
+                try:
+                    citations = []
+                    for idx, item in enumerate(body.get("results", []), start=1):
+                        title = (
+                            str(item.get("title", "")) if isinstance(item.get("title"), str) else ""
+                        )
+                        url = str(item.get("url", "")) if isinstance(item.get("url"), str) else ""
+                        snippet_raw = item.get("content") or item.get("snippet")
+                        snippet = str(snippet_raw) if isinstance(snippet_raw, str) else ""
+                        raw_score = item.get("score")
+                        score: float | None = (
+                            float(raw_score)
+                            if raw_score is not None and isinstance(raw_score, (int, float))
+                            else None
+                        )
+                        if title or url:
+                            _ = idx
+                            citations.append(
+                                Citation(
+                                    title=title,
+                                    url=url,
+                                    snippet=snippet,
+                                    score=score,
+                                    query=query,
+                                )
+                            )
+                except (TypeError, ValueError) as exc:
+                    last_error = f"bad HTTP response body: {exc}"
+                    break
+                last_error = None
+                break
+
+            if response is not None:
                 last_error = f"HTTP {response.status_code}: {response.text[:200]}"
                 if response.status_code < 500 and response.status_code != 429:
                     break  # client errors will not succeed on retry
-            except (httpx.HTTPError, ValueError) as exc:
-                last_error = f"{type(exc).__name__}: {exc}"
             if attempt < attempts - 1:
                 self._sleep(self._config.retry_backoff_s * (2**attempt))
 

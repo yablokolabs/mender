@@ -83,30 +83,43 @@ class RootCauseReport(BaseModel):
                 confidence_f = float(confidence)
             except (TypeError, ValueError):
                 confidence_f = 0.0
+            _labels: list[str] = []
+            if isinstance(data.get("labels"), list):
+                _labels = [str(label) for label in data.get("labels", []) if str(label).strip()][:5]
+            _evidence_refs: list[str] = []
+            if isinstance(data.get("evidence_refs"), list):
+                _evidence_refs = [
+                    str(ref) for ref in data.get("evidence_refs", []) if str(ref).strip()
+                ]
+            _search_queries: list[str] = []
+            if isinstance(queries, list):
+                _search_queries = [str(q).strip() for q in queries if str(q).strip()]
             return cls(
                 service=service,
                 namespace=namespace,
                 title=str(data.get("title", "Untitled incident")),
                 root_cause=str(data.get("root_cause", "")),
                 mechanism=str(data.get("mechanism", "")),
-                labels=[str(label) for label in data.get("labels", []) if str(label).strip()][:5],
+                labels=_labels,
                 confidence=max(0.0, min(1.0, confidence_f)),
-                evidence_refs=[
-                    str(ref) for ref in data.get("evidence_refs", []) if str(ref).strip()
-                ],
+                evidence_refs=_evidence_refs,
                 triage_summary=triage.summary,
-                search_queries=queries,
+                search_queries=_search_queries,
                 sources=sources,
                 tavily_degraded=degraded,
                 model=model,
             )
+
+        _search_queries_fb: list[str] = []
+        if isinstance(queries, list):
+            _search_queries_fb = [str(q).strip() for q in queries if str(q).strip()]
         return cls(
             service=service,
             namespace=namespace,
             title="Untitled incident",
             root_cause=str(data),
             triage_summary=triage.summary,
-            search_queries=queries,
+            search_queries=_search_queries_fb,
             sources=sources,
             tavily_degraded=degraded,
             model=model,
@@ -114,7 +127,9 @@ class RootCauseReport(BaseModel):
 
     def markdown(self) -> str:
         refs = [f"- {ref}" for ref in self.evidence_refs] or ["- (none recorded)"]
-        sources_md = [citation.markdown() for citation in self.sources] or ["- (no results)"]
+        sources_md = [
+            citation.markdown(number=i + 1) for i, citation in enumerate(self.sources)
+        ] or ["- (no results)"]
         lines = [
             f"# Root cause: {self.title}",
             "",
@@ -182,7 +197,9 @@ def diagnose(
         for citation in result.citations:
             counter += 1
             snippet = citation.snippet[:600]
-            sources_block.append(f"[{counter}] {citation.title} — {citation.url}\n{snippet}")
+            sources_block.append(
+                f"[{counter}] {citation.title}: {citation.url}\nsnippet: {snippet}"
+            )
     search_section = "\n\n".join(sources_block) or "Tavily returned no results for these queries."
 
     suspects = ", ".join(triage.suspects)

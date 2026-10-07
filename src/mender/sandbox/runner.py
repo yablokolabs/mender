@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import re
 import shlex
 import subprocess
 import time
@@ -44,15 +46,44 @@ def _tail(text: str, limit: int = OUTPUT_TAIL) -> str:
 class DockerRunner:
     """Runs each command in a fresh `docker run --rm` container with the workdir mounted."""
 
+    _SBOX_PREFIX = "mender-sbox-"
+
     def __init__(self, image: str, *, docker_binary: str = "docker") -> None:
         self._image = image
         self._docker = docker_binary
 
+    def _container_name(self, workdir: Path) -> str:
+        digest = hashlib.sha256(str(workdir.resolve()).encode()).hexdigest()[:10]
+        safe_name = re.sub(r"[^a-z0-9-]+", "-", f"{self._SBOX_PREFIX}{digest}").strip("-")
+        return safe_name
+
+    @staticmethod
+    def _sandbox_containers() -> list[str]:
+        try:
+            proc = subprocess.run(
+                ["docker", "ps", "--format", "{{.Names}}"],
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            return []
+        if proc.returncode != 0:
+            return []
+        return [
+            name.strip()
+            for name in proc.stdout.splitlines()
+            if name.strip().startswith(DockerRunner._SBOX_PREFIX)
+        ]
+
     def run(self, workdir: Path, command: list[str], *, timeout_s: int) -> SandboxResult:
+        container = self._container_name(workdir)
         argv = [
             self._docker,
             "run",
             "--rm",
+            "--name",
+            container,
             "--network",
             "none",
             "--memory",

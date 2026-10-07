@@ -38,12 +38,21 @@ class Triage(BaseModel):
         if not isinstance(data, dict):
             return cls(summary=str(data), model=model)
         severity = str(data.get("severity", "unknown")).lower()
+        _suspects: list[str] = []
+        if isinstance(data.get("suspects"), list):
+            _suspects = [str(s) for s in data.get("suspects", []) if str(s).strip()][:10]
+        _signals: list[str] = []
+        if isinstance(data.get("signals"), list):
+            _signals = [str(s) for s in data.get("signals", []) if str(s).strip()][:10]
+        _search_queries: list[str] = []
+        if isinstance(data.get("search_queries"), list):
+            _search_queries = [str(s) for s in data.get("search_queries", []) if str(s).strip()][:3]
         return cls(
             summary=str(data.get("summary", "")),
             severity=severity if severity in SEVERITIES else "unknown",
-            suspects=[str(s) for s in data.get("suspects", []) if str(s).strip()][:10],
-            signals=[str(s) for s in data.get("signals", []) if str(s).strip()][:10],
-            search_queries=[str(s) for s in data.get("search_queries", []) if str(s).strip()][:3],
+            suspects=_suspects,
+            signals=_signals,
+            search_queries=_search_queries,
             model=model,
         )
 
