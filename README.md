@@ -193,13 +193,35 @@ For comparison, the first full eval (same cluster, before the failure-mode fixes
   still diverge into a runaway-reasoning loop occasionally; the repair path catches it,
   but a case can fail if both attempts starve.
 
+## Container image
+
+CI builds the service image, starts it and calls `GET /healthz` on each pull request.
+After the checks pass on `main` or on a version tag, it publishes that image to GitHub
+Container Registry:
+
+| Git event | Image tags |
+|---|---|
+| push to `main` | `main`, `sha-<short commit>` |
+| tag `vX.Y.Z` | `X.Y.Z`, `X.Y`, `latest` |
+
+```bash
+docker pull ghcr.io/yablokolabs/mender:main
+docker run --env-file .env -v /var/run/docker.sock:/var/run/docker.sock \
+    -p 8080:8080 ghcr.io/yablokolabs/mender:main
+curl http://localhost:8080/healthz          # {"status": "ok"}
+```
+
+The image contains the default `mender.yaml`; mount a different file at
+`/app/mender.yaml` to change the configuration. A full run also needs the Docker socket
+(for the sandbox) and access to the cluster. The image is `linux/amd64` only.
+
 ## Development
 
 ```bash
 make test        # uv run ruff check + ruff format --check + mypy + pytest
 make diagram     # render assets/arch-diagram.png from assets/arch-diagram.svg
 make serve       # mender serve on :8080 (GET /healthz, POST /diagnose, POST /run)
-docker build -t mender .   # python:3.12-slim + kubectl
+make image       # build the service image (python:3.12-slim + kubectl), start it, call /healthz
 ```
 
 - `src/mender/` — package (mypy strict, fully typed)
