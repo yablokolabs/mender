@@ -1,0 +1,42 @@
+/* Fonts are served from node_modules, so a render needs no network. */
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/jetbrains-mono/latin-500.css";
+
+:root {
+	/* Recommended token set. The three brand colours are sampled from mender-logo.png. */
+	--color-bg: #0b1220;
+	--color-fg: #e8eef8;
+	--color-accent: #76b900;
+
+	/* Surfaces, from the frame background up to a raised panel */
+	--color-bg-deep: #070c16;
+	--color-surface: #111b2e;
+	--color-surface-raised: #18253d;
+	--color-border: #2a3a57;
+
+	/* Text steps */
+	--color-steel: #c9d6ea;
+	--color-muted: #93a3bd;
+	--color-on-accent: #0b1220;
+
+	/* Red appears only where the service is broken. */
+	--color-danger: #ff6b6b;
+
+	/* Typography */
+	--font-display: "Inter", system-ui, sans-serif;
+	--font-body: "Inter", system-ui, sans-serif;
+	--font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+	/* Radii */
+	--radius-md: 16px;
+	--radius-lg: 24px;
+	--radius-pill: 999px;
+
+	/* Frame safety (videowright convention) */
+	--safe-x: 96px;
+	--safe-y: 64px;
+}

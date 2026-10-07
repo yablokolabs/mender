@@ -1,0 +1,1134 @@
+{
+  "words": [
+    {
+      "word": "Mender",
+      "start": 0.058,
+      "end": 0.348
+    },
+    {
+      "word": "takes",
+      "start": 0.383,
+      "end": 0.604
+    },
+    {
+      "word": "a",
+      "start": 0.639,
+      "end": 0.662
+    },
+    {
+      "word": "broken",
+      "start": 0.708,
+      "end": 1.01
+    },
+    {
+      "word": "Kubernetes",
+      "start": 1.057,
+      "end": 1.649
+    },
+    {
+      "word": "service",
+      "start": 1.695,
+      "end": 2.136
+    },
+    {
+      "word": "and",
+      "start": 2.183,
+      "end": 2.334
+    },
+    {
+      "word": "returns",
+      "start": 2.403,
+      "end": 2.833
+    },
+    {
+      "word": "a",
+      "start": 2.879,
+      "end": 2.902
+    },
+    {
+      "word": "verified",
+      "start": 2.949,
+      "end": 3.413
+    },
+    {
+      "word": "fix.",
+      "start": 3.471,
+      "end": 4.005
+    },
+    {
+      "word": "It",
+      "start": 4.331,
+      "end": 4.47
+    },
+    {
+      "word": "finds",
+      "start": 4.528,
+      "end": 4.853
+    },
+    {
+      "word": "the",
+      "start": 4.888,
+      "end": 4.957
+    },
+    {
+      "word": "root",
+      "start": 5.004,
+      "end": 5.213
+    },
+    {
+      "word": "cause,",
+      "start": 5.283,
+      "end": 5.828
+    },
+    {
+      "word": "writes",
+      "start": 5.898,
+      "end": 6.2
+    },
+    {
+      "word": "a",
+      "start": 6.235,
+      "end": 6.258
+    },
+    {
+      "word": "patch,",
+      "start": 6.316,
+      "end": 6.838
+    },
+    {
+      "word": "tests",
+      "start": 7.082,
+      "end": 7.442
+    },
+    {
+      "word": "it",
+      "start": 7.5,
+      "end": 7.593
+    },
+    {
+      "word": "in",
+      "start": 7.651,
+      "end": 7.709
+    },
+    {
+      "word": "a",
+      "start": 7.767,
+      "end": 7.79
+    },
+    {
+      "word": "sandbox,",
+      "start": 7.848,
+      "end": 8.406
+    },
+    {
+      "word": "and",
+      "start": 8.429,
+      "end": 8.499
+    },
+    {
+      "word": "prepares",
+      "start": 8.545,
+      "end": 8.905
+    },
+    {
+      "word": "a",
+      "start": 8.951,
+      "end": 8.975
+    },
+    {
+      "word": "pull",
+      "start": 9.021,
+      "end": 9.207
+    },
+    {
+      "word": "request",
+      "start": 9.276,
+      "end": 9.659
+    },
+    {
+      "word": "for",
+      "start": 9.706,
+      "end": 9.81
+    },
+    {
+      "word": "a",
+      "start": 9.845,
+      "end": 9.88
+    },
+    {
+      "word": "human",
+      "start": 9.927,
+      "end": 10.24
+    },
+    {
+      "word": "to",
+      "start": 10.31,
+      "end": 10.379
+    },
+    {
+      "word": "review.",
+      "start": 10.461,
+      "end": 11.064
+    },
+    {
+      "word": "Mender",
+      "start": 11.505,
+      "end": 11.854
+    },
+    {
+      "word": "never",
+      "start": 11.923,
+      "end": 12.144
+    },
+    {
+      "word": "merges",
+      "start": 12.202,
+      "end": 12.574
+    },
+    {
+      "word": "anything",
+      "start": 12.655,
+      "end": 13.108
+    },
+    {
+      "word": "itself.",
+      "start": 13.166,
+      "end": 13.827
+    },
+    {
+      "word": "We",
+      "start": 14.721,
+      "end": 14.849
+    },
+    {
+      "word": "start",
+      "start": 14.907,
+      "end": 15.186
+    },
+    {
+      "word": "with",
+      "start": 15.221,
+      "end": 15.325
+    },
+    {
+      "word": "a",
+      "start": 15.36,
+      "end": 15.383
+    },
+    {
+      "word": "healthy",
+      "start": 15.441,
+      "end": 15.72
+    },
+    {
+      "word": "checkout",
+      "start": 15.778,
+      "end": 16.196
+    },
+    {
+      "word": "service",
+      "start": 16.254,
+      "end": 16.637
+    },
+    {
+      "word": "on",
+      "start": 16.683,
+      "end": 16.8
+    },
+    {
+      "word": "a",
+      "start": 16.858,
+      "end": 16.881
+    },
+    {
+      "word": "local",
+      "start": 16.95,
+      "end": 17.252
+    },
+    {
+      "word": "cluster.",
+      "start": 17.322,
+      "end": 17.984
+    },
+    {
+      "word": "All",
+      "start": 18.587,
+      "end": 18.808
+    },
+    {
+      "word": "twenty-one",
+      "start": 18.878,
+      "end": 19.389
+    },
+    {
+      "word": "checks",
+      "start": 19.423,
+      "end": 19.714
+    },
+    {
+      "word": "pass.",
+      "start": 19.772,
+      "end": 20.387
+    },
+    {
+      "word": "Then",
+      "start": 21.223,
+      "end": 21.444
+    },
+    {
+      "word": "we",
+      "start": 21.502,
+      "end": 21.594
+    },
+    {
+      "word": "inject",
+      "start": 21.641,
+      "end": 22.001
+    },
+    {
+      "word": "a",
+      "start": 22.047,
+      "end": 22.07
+    },
+    {
+      "word": "fault.",
+      "start": 22.152,
+      "end": 22.767
+    },
+    {
+      "word": "The",
+      "start": 23.208,
+      "end": 23.324
+    },
+    {
+      "word": "memory",
+      "start": 23.382,
+      "end": 23.649
+    },
+    {
+      "word": "limit",
+      "start": 23.696,
+      "end": 23.928
+    },
+    {
+      "word": "drops",
+      "start": 23.986,
+      "end": 24.265
+    },
+    {
+      "word": "to",
+      "start": 24.311,
+      "end": 24.381
+    },
+    {
+      "word": "sixty-four",
+      "start": 24.474,
+      "end": 25.089
+    },
+    {
+      "word": "megabytes,",
+      "start": 25.147,
+      "end": 25.902
+    },
+    {
+      "word": "below",
+      "start": 26.053,
+      "end": 26.413
+    },
+    {
+      "word": "what",
+      "start": 26.471,
+      "end": 26.598
+    },
+    {
+      "word": "the",
+      "start": 26.633,
+      "end": 26.703
+    },
+    {
+      "word": "service",
+      "start": 26.749,
+      "end": 27.121
+    },
+    {
+      "word": "needs",
+      "start": 27.156,
+      "end": 27.388
+    },
+    {
+      "word": "to",
+      "start": 27.434,
+      "end": 27.504
+    },
+    {
+      "word": "start.",
+      "start": 27.585,
+      "end": 28.224
+    },
+    {
+      "word": "The",
+      "start": 28.827,
+      "end": 28.944
+    },
+    {
+      "word": "pod",
+      "start": 28.99,
+      "end": 29.211
+    },
+    {
+      "word": "is",
+      "start": 29.257,
+      "end": 29.338
+    },
+    {
+      "word": "killed,",
+      "start": 29.42,
+      "end": 29.988
+    },
+    {
+      "word": "again",
+      "start": 30.139,
+      "end": 30.581
+    },
+    {
+      "word": "and",
+      "start": 30.662,
+      "end": 30.79
+    },
+    {
+      "word": "again.",
+      "start": 30.848,
+      "end": 31.475
+    },
+    {
+      "word": "Mender",
+      "start": 32.311,
+      "end": 32.636
+    },
+    {
+      "word": "collects",
+      "start": 32.682,
+      "end": 33.042
+    },
+    {
+      "word": "the",
+      "start": 33.077,
+      "end": 33.147
+    },
+    {
+      "word": "evidence.",
+      "start": 33.216,
+      "end": 33.971
+    },
+    {
+      "word": "The",
+      "start": 34.354,
+      "end": 34.482
+    },
+    {
+      "word": "nano",
+      "start": 34.552,
+      "end": 34.83
+    },
+    {
+      "word": "model",
+      "start": 34.9,
+      "end": 35.202
+    },
+    {
+      "word": "reads",
+      "start": 35.295,
+      "end": 35.504
+    },
+    {
+      "word": "about",
+      "start": 35.527,
+      "end": 35.771
+    },
+    {
+      "word": "eleven",
+      "start": 35.84,
+      "end": 36.119
+    },
+    {
+      "word": "thousand",
+      "start": 36.177,
+      "end": 36.514
+    },
+    {
+      "word": "tokens",
+      "start": 36.572,
+      "end": 37.013
+    },
+    {
+      "word": "of",
+      "start": 37.059,
+      "end": 37.117
+    },
+    {
+      "word": "logs",
+      "start": 37.199,
+      "end": 37.489
+    },
+    {
+      "word": "and",
+      "start": 37.524,
+      "end": 37.617
+    },
+    {
+      "word": "events,",
+      "start": 37.675,
+      "end": 38.336
+    },
+    {
+      "word": "and",
+      "start": 38.58,
+      "end": 38.766
+    },
+    {
+      "word": "returns",
+      "start": 38.836,
+      "end": 39.277
+    },
+    {
+      "word": "a",
+      "start": 39.312,
+      "end": 39.347
+    },
+    {
+      "word": "short",
+      "start": 39.416,
+      "end": 39.672
+    },
+    {
+      "word": "list",
+      "start": 39.73,
+      "end": 39.939
+    },
+    {
+      "word": "of",
+      "start": 39.985,
+      "end": 40.032
+    },
+    {
+      "word": "signals",
+      "start": 40.09,
+      "end": 40.531
+    },
+    {
+      "word": "and",
+      "start": 40.577,
+      "end": 40.682
+    },
+    {
+      "word": "suspects.",
+      "start": 40.751,
+      "end": 41.68
+    },
+    {
+      "word": "The",
+      "start": 42.435,
+      "end": 42.563
+    },
+    {
+      "word": "ultra",
+      "start": 42.621,
+      "end": 42.911
+    },
+    {
+      "word": "model",
+      "start": 42.957,
+      "end": 43.248
+    },
+    {
+      "word": "plans",
+      "start": 43.329,
+      "end": 43.735
+    },
+    {
+      "word": "three",
+      "start": 43.805,
+      "end": 44.083
+    },
+    {
+      "word": "web",
+      "start": 44.13,
+      "end": 44.327
+    },
+    {
+      "word": "searches,",
+      "start": 44.408,
+      "end": 45.128
+    },
+    {
+      "word": "runs",
+      "start": 45.279,
+      "end": 45.558
+    },
+    {
+      "word": "them",
+      "start": 45.604,
+      "end": 45.72
+    },
+    {
+      "word": "through",
+      "start": 45.767,
+      "end": 45.999
+    },
+    {
+      "word": "Tavily,",
+      "start": 46.057,
+      "end": 46.696
+    },
+    {
+      "word": "and",
+      "start": 46.94,
+      "end": 47.102
+    },
+    {
+      "word": "writes",
+      "start": 47.149,
+      "end": 47.439
+    },
+    {
+      "word": "the",
+      "start": 47.497,
+      "end": 47.567
+    },
+    {
+      "word": "root",
+      "start": 47.625,
+      "end": 47.845
+    },
+    {
+      "word": "cause",
+      "start": 47.927,
+      "end": 48.228
+    },
+    {
+      "word": "report.",
+      "start": 48.275,
+      "end": 48.948
+    },
+    {
+      "word": "The",
+      "start": 49.192,
+      "end": 49.297
+    },
+    {
+      "word": "report",
+      "start": 49.366,
+      "end": 49.819
+    },
+    {
+      "word": "carries",
+      "start": 49.877,
+      "end": 50.295
+    },
+    {
+      "word": "numbered",
+      "start": 50.376,
+      "end": 50.701
+    },
+    {
+      "word": "citations",
+      "start": 50.748,
+      "end": 51.502
+    },
+    {
+      "word": "that",
+      "start": 51.561,
+      "end": 51.688
+    },
+    {
+      "word": "a",
+      "start": 51.735,
+      "end": 51.758
+    },
+    {
+      "word": "reviewer",
+      "start": 51.839,
+      "end": 52.245
+    },
+    {
+      "word": "can",
+      "start": 52.304,
+      "end": 52.443
+    },
+    {
+      "word": "open.",
+      "start": 52.501,
+      "end": 53.0
+    },
+    {
+      "word": "The",
+      "start": 53.871,
+      "end": 53.999
+    },
+    {
+      "word": "super",
+      "start": 54.057,
+      "end": 54.382
+    },
+    {
+      "word": "model",
+      "start": 54.428,
+      "end": 54.695
+    },
+    {
+      "word": "then",
+      "start": 54.765,
+      "end": 54.939
+    },
+    {
+      "word": "writes",
+      "start": 54.985,
+      "end": 55.311
+    },
+    {
+      "word": "the",
+      "start": 55.357,
+      "end": 55.427
+    },
+    {
+      "word": "patch.",
+      "start": 55.485,
+      "end": 56.1
+    },
+    {
+      "word": "It",
+      "start": 56.483,
+      "end": 56.611
+    },
+    {
+      "word": "can",
+      "start": 56.646,
+      "end": 56.762
+    },
+    {
+      "word": "only",
+      "start": 56.82,
+      "end": 57.04
+    },
+    {
+      "word": "touch",
+      "start": 57.098,
+      "end": 57.354
+    },
+    {
+      "word": "the",
+      "start": 57.412,
+      "end": 57.482
+    },
+    {
+      "word": "files",
+      "start": 57.551,
+      "end": 57.969
+    },
+    {
+      "word": "it",
+      "start": 58.027,
+      "end": 58.097
+    },
+    {
+      "word": "was",
+      "start": 58.132,
+      "end": 58.236
+    },
+    {
+      "word": "given.",
+      "start": 58.283,
+      "end": 58.828
+    },
+    {
+      "word": "Here,",
+      "start": 59.339,
+      "end": 59.827
+    },
+    {
+      "word": "it",
+      "start": 60.036,
+      "end": 60.175
+    },
+    {
+      "word": "raises",
+      "start": 60.245,
+      "end": 60.605
+    },
+    {
+      "word": "the",
+      "start": 60.651,
+      "end": 60.721
+    },
+    {
+      "word": "memory",
+      "start": 60.779,
+      "end": 61.081
+    },
+    {
+      "word": "limit",
+      "start": 61.139,
+      "end": 61.487
+    },
+    {
+      "word": "back",
+      "start": 61.661,
+      "end": 61.882
+    },
+    {
+      "word": "to",
+      "start": 61.94,
+      "end": 61.998
+    },
+    {
+      "word": "five",
+      "start": 62.114,
+      "end": 62.474
+    },
+    {
+      "word": "hundred",
+      "start": 62.52,
+      "end": 62.857
+    },
+    {
+      "word": "and",
+      "start": 62.915,
+      "end": 63.031
+    },
+    {
+      "word": "twelve",
+      "start": 63.101,
+      "end": 63.6
+    },
+    {
+      "word": "megabytes.",
+      "start": 63.658,
+      "end": 64.506
+    },
+    {
+      "word": "Before",
+      "start": 65.272,
+      "end": 65.62
+    },
+    {
+      "word": "anything",
+      "start": 65.678,
+      "end": 66.096
+    },
+    {
+      "word": "is",
+      "start": 66.143,
+      "end": 66.224
+    },
+    {
+      "word": "proposed,",
+      "start": 66.271,
+      "end": 66.909
+    },
+    {
+      "word": "the",
+      "start": 66.979,
+      "end": 67.095
+    },
+    {
+      "word": "tests",
+      "start": 67.153,
+      "end": 67.548
+    },
+    {
+      "word": "run",
+      "start": 67.606,
+      "end": 67.849
+    },
+    {
+      "word": "on",
+      "start": 67.919,
+      "end": 67.989
+    },
+    {
+      "word": "the",
+      "start": 68.024,
+      "end": 68.093
+    },
+    {
+      "word": "patched",
+      "start": 68.128,
+      "end": 68.465
+    },
+    {
+      "word": "files",
+      "start": 68.523,
+      "end": 68.918
+    },
+    {
+      "word": "in",
+      "start": 68.964,
+      "end": 69.022
+    },
+    {
+      "word": "a",
+      "start": 69.069,
+      "end": 69.103
+    },
+    {
+      "word": "Docker",
+      "start": 69.161,
+      "end": 69.44
+    },
+    {
+      "word": "container",
+      "start": 69.486,
+      "end": 69.939
+    },
+    {
+      "word": "with",
+      "start": 69.974,
+      "end": 70.125
+    },
+    {
+      "word": "no",
+      "start": 70.206,
+      "end": 70.392
+    },
+    {
+      "word": "network.",
+      "start": 70.473,
+      "end": 71.147
+    },
+    {
+      "word": "Twenty-one",
+      "start": 71.472,
+      "end": 72.017
+    },
+    {
+      "word": "of",
+      "start": 72.052,
+      "end": 72.099
+    },
+    {
+      "word": "twenty-one",
+      "start": 72.145,
+      "end": 72.668
+    },
+    {
+      "word": "checks",
+      "start": 72.714,
+      "end": 73.051
+    },
+    {
+      "word": "pass,",
+      "start": 73.109,
+      "end": 73.759
+    },
+    {
+      "word": "on",
+      "start": 74.2,
+      "end": 74.339
+    },
+    {
+      "word": "the",
+      "start": 74.386,
+      "end": 74.456
+    },
+    {
+      "word": "first",
+      "start": 74.514,
+      "end": 74.815
+    },
+    {
+      "word": "attempt.",
+      "start": 74.862,
+      "end": 75.477
+    },
+    {
+      "word": "Mender",
+      "start": 76.232,
+      "end": 76.569
+    },
+    {
+      "word": "prepares",
+      "start": 76.603,
+      "end": 77.079
+    },
+    {
+      "word": "the",
+      "start": 77.137,
+      "end": 77.207
+    },
+    {
+      "word": "pull",
+      "start": 77.242,
+      "end": 77.439
+    },
+    {
+      "word": "request:",
+      "start": 77.508,
+      "end": 78.182
+    },
+    {
+      "word": "root",
+      "start": 78.507,
+      "end": 78.739
+    },
+    {
+      "word": "cause,",
+      "start": 78.82,
+      "end": 79.378
+    },
+    {
+      "word": "evidence,",
+      "start": 79.622,
+      "end": 80.353
+    },
+    {
+      "word": "the",
+      "start": 80.527,
+      "end": 80.643
+    },
+    {
+      "word": "diff,",
+      "start": 80.701,
+      "end": 81.235
+    },
+    {
+      "word": "the",
+      "start": 81.56,
+      "end": 81.676
+    },
+    {
+      "word": "test",
+      "start": 81.723,
+      "end": 81.978
+    },
+    {
+      "word": "results,",
+      "start": 82.036,
+      "end": 82.663
+    },
+    {
+      "word": "and",
+      "start": 82.779,
+      "end": 82.93
+    },
+    {
+      "word": "the",
+      "start": 82.977,
+      "end": 83.046
+    },
+    {
+      "word": "sources.",
+      "start": 83.093,
+      "end": 83.766
+    },
+    {
+      "word": "A",
+      "start": 84.01,
+      "end": 84.103
+    },
+    {
+      "word": "person",
+      "start": 84.184,
+      "end": 84.521
+    },
+    {
+      "word": "reviews",
+      "start": 84.579,
+      "end": 84.927
+    },
+    {
+      "word": "it",
+      "start": 84.985,
+      "end": 85.078
+    },
+    {
+      "word": "and",
+      "start": 85.136,
+      "end": 85.252
+    },
+    {
+      "word": "merges",
+      "start": 85.334,
+      "end": 85.694
+    },
+    {
+      "word": "it.",
+      "start": 85.763,
+      "end": 86.088
+    },
+    {
+      "word": "From",
+      "start": 86.855,
+      "end": 87.04
+    },
+    {
+      "word": "evidence",
+      "start": 87.11,
+      "end": 87.551
+    },
+    {
+      "word": "to",
+      "start": 87.586,
+      "end": 87.656
+    },
+    {
+      "word": "a",
+      "start": 87.714,
+      "end": 87.737
+    },
+    {
+      "word": "verified",
+      "start": 87.795,
+      "end": 88.259
+    },
+    {
+      "word": "fix",
+      "start": 88.317,
+      "end": 88.561
+    },
+    {
+      "word": "in",
+      "start": 88.631,
+      "end": 88.701
+    },
+    {
+      "word": "twenty-five",
+      "start": 88.747,
+      "end": 89.339
+    },
+    {
+      "word": "seconds.",
+      "start": 89.385,
+      "end": 90.059
+    },
+    {
+      "word": "Mender.",
+      "start": 90.5,
+      "end": 91.127
+    },
+    {
+      "word": "It",
+      "start": 91.638,
+      "end": 91.8
+    },
+    {
+      "word": "never",
+      "start": 91.882,
+      "end": 92.125
+    },
+    {
+      "word": "merges",
+      "start": 92.183,
+      "end": 92.532
+    },
+    {
+      "word": "without",
+      "start": 92.578,
+      "end": 92.892
+    },
+    {
+      "word": "you.",
+      "start": 92.961,
+      "end": 93.484
+    }
+  ]
+}

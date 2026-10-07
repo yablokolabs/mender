@@ -197,12 +197,16 @@ For comparison, the first full eval (same cluster, before the failure-mode fixes
 
 ```bash
 make test        # uv run ruff check + ruff format --check + mypy + pytest
+make diagram     # render assets/arch-diagram.png from assets/arch-diagram.svg
 make serve       # mender serve on :8080 (GET /healthz, POST /diagnose, POST /run)
 docker build -t mender .   # python:3.12-slim + kubectl
 ```
 
 - `src/mender/` — package (mypy strict, fully typed)
 - `demo/` — kind cluster setup, sample app, 23-fault catalogue, injection tooling
+- `demo/videos/` — [videowright](https://github.com/scosman/videowright) source of the
+  demo video `demo/mender-demo.mp4`. In that folder: `npm ci`, `npm test` (browser tests
+  of every scene), then `npx videowright render demo --output ../mender-demo.mp4`
 - `results/` — committed eval outputs
 - `PLAN.md` — phase plan; `REVIEWS.md` — external review audit trail
 

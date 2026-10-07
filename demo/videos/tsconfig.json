@@ -18,6 +18,7 @@
 		"transitions/**/*",
 		"styles/**/*",
 		"videos/**/*",
+		"assets.d.ts",
 		"videowright.config.ts"
 	]
 }
