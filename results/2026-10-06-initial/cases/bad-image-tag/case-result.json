@@ -1,0 +1,43 @@
+{
+  "fault_id": "bad-image-tag",
+  "category": "images",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "deployment_config",
+    "image_pull_failure",
+    "image_tag"
+  ],
+  "expected_labels": [
+    "image_tag",
+    "image_pull",
+    "imagepullbackoff",
+    "image_config"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 26589.55652399891,
+  "case_wall_ms": 112366.89840599865,
+  "report_title": "checkout pod ImagePullBackOff due to unpublished image tag 1.9.9",
+  "cost_usd_by_tier": {
+    "nano": 0.00072438,
+    "ultra": 0.02597,
+    "tavily": null,
+    "super": 0.0040395
+  },
+  "tokens_by_tier": {
+    "nano": 10249,
+    "ultra": 23236,
+    "tavily": 0,
+    "super": 11255
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/bad-image-tag/out"
+}

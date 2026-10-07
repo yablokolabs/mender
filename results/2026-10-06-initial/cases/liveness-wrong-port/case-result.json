@@ -1,0 +1,44 @@
+{
+  "fault_id": "liveness-wrong-port",
+  "category": "probes",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "connection_refused",
+    "liveness_probe",
+    "port_mismatch",
+    "probe_config",
+    "restart_loop"
+  ],
+  "expected_labels": [
+    "liveness_probe",
+    "probe_config",
+    "probe_port"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 36817.66874800087,
+  "case_wall_ms": 74625.99653000507,
+  "report_title": "Checkout service restart loop due to liveness probe port mismatch (9090 vs 8080)",
+  "cost_usd_by_tier": {
+    "nano": 0.0009457199999999999,
+    "ultra": 0.029955000000000002,
+    "tavily": null,
+    "super": 0.0039753
+  },
+  "tokens_by_tier": {
+    "nano": 11535,
+    "ultra": 25493,
+    "tavily": 0,
+    "super": 11547
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/liveness-wrong-port/out"
+}

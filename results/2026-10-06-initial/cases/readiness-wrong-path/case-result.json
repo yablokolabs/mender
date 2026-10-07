@@ -1,0 +1,32 @@
+{
+  "fault_id": "readiness-wrong-path",
+  "category": "probes",
+  "status": "error",
+  "error": "JSONError: no parseable JSON value found in model reply",
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [],
+  "expected_labels": [
+    "readiness_probe",
+    "probe_config",
+    "probe_path"
+  ],
+  "verify_passed": false,
+  "verify_attempts": null,
+  "time_to_pr_ready_ms": null,
+  "case_wall_ms": 117978.85573499661,
+  "report_title": "",
+  "cost_usd_by_tier": {
+    "nano": 0.0013417799999999999,
+    "ultra": 0.085969
+  },
+  "tokens_by_tier": {
+    "nano": 19399,
+    "ultra": 53197
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/readiness-wrong-path/out"
+}

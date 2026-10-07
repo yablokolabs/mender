@@ -1,0 +1,45 @@
+{
+  "fault_id": "migration-missing-column",
+  "category": "migration",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "control_plane_kubelet",
+    "grace_period_exceeded",
+    "prestop_hook",
+    "sigterm_unhandled",
+    "termination_stuck"
+  ],
+  "expected_labels": [
+    "migration_failure",
+    "schema_mismatch",
+    "missing_column",
+    "migration"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 67238.17149300157,
+  "case_wall_ms": 67499.52889699489,
+  "report_title": "Checkout pods stuck in Terminating state past grace period on control plane node",
+  "cost_usd_by_tier": {
+    "nano": 0.0011630999999999998,
+    "ultra": 0.048195,
+    "tavily": null,
+    "super": 0.0078147
+  },
+  "tokens_by_tier": {
+    "nano": 13727,
+    "ultra": 33647,
+    "tavily": 0,
+    "super": 16667
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/migration-missing-column/out"
+}

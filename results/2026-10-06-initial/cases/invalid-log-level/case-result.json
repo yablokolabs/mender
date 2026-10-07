@@ -1,0 +1,44 @@
+{
+  "fault_id": "invalid-log-level",
+  "category": "config",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "config_map_content",
+    "crashloopbackoff",
+    "probe_config",
+    "validation_failure"
+  ],
+  "expected_labels": [
+    "config_value",
+    "invalid_config",
+    "log_level",
+    "crash_loop"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 33273.43398999801,
+  "case_wall_ms": 119002.11805200524,
+  "report_title": "checkout pod crashloopbackoff due to invalid log_level in ConfigMap",
+  "cost_usd_by_tier": {
+    "nano": 0.0008244600000000001,
+    "ultra": 0.029299000000000002,
+    "tavily": null,
+    "super": 0.0036635999999999995
+  },
+  "tokens_by_tier": {
+    "nano": 11470,
+    "ultra": 25499,
+    "tavily": 0,
+    "super": 11440
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/invalid-log-level/out"
+}

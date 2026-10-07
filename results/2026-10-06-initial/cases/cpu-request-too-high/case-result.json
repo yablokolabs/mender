@@ -1,0 +1,24 @@
+{
+  "fault_id": "cpu-request-too-high",
+  "category": "scheduling",
+  "status": "inject-failed",
+  "error": "inject failed: [inject] apply returned 1: The Deployment \"checkout\" is invalid: spec.template.spec.containers[0].resources.requests: Invalid value: \"32\": must be less than or equal to cpu limit of 1\n\n",
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [],
+  "expected_labels": [
+    "resource_request",
+    "scheduling",
+    "pending",
+    "insufficient_cpu"
+  ],
+  "verify_passed": false,
+  "verify_attempts": null,
+  "time_to_pr_ready_ms": null,
+  "case_wall_ms": 430.99775799782947,
+  "report_title": "",
+  "cost_usd_by_tier": {},
+  "tokens_by_tier": {},
+  "calls_by_tier": {},
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/cpu-request-too-high/out"
+}

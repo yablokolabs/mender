@@ -1,0 +1,44 @@
+{
+  "fault_id": "service-selector-mismatch",
+  "category": "networking",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "label_mismatch",
+    "rolling_update",
+    "service_endpoints_empty",
+    "service_selector_mismatch"
+  ],
+  "expected_labels": [
+    "service_selector",
+    "selector_mismatch",
+    "traffic_routing",
+    "no_endpoints"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 32565.72068999958,
+  "case_wall_ms": 69993.17775400414,
+  "report_title": "Checkout service selector label mismatch prevents endpoint population",
+  "cost_usd_by_tier": {
+    "nano": 0.0012341399999999999,
+    "ultra": 0.029086,
+    "tavily": null,
+    "super": 0.0035135999999999995
+  },
+  "tokens_by_tier": {
+    "nano": 12670,
+    "ultra": 24884,
+    "tavily": 0,
+    "super": 10742
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/service-selector-mismatch/out"
+}

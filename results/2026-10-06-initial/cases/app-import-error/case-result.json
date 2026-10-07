@@ -1,0 +1,39 @@
+{
+  "fault_id": "app-import-error",
+  "category": "app",
+  "status": "error",
+  "error": "JSONError: no parseable JSON value found in model reply",
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [],
+  "expected_labels": [
+    "import_error",
+    "module_not_found",
+    "code_bug",
+    "crash_loop"
+  ],
+  "verify_passed": false,
+  "verify_attempts": null,
+  "time_to_pr_ready_ms": null,
+  "case_wall_ms": 261129.04290100414,
+  "report_title": "",
+  "cost_usd_by_tier": {
+    "nano": 0.0014433,
+    "ultra": 0.052389000000000005,
+    "tavily": null,
+    "super": 0.0366933
+  },
+  "tokens_by_tier": {
+    "nano": 22246,
+    "ultra": 47469,
+    "tavily": 0,
+    "super": 68177
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 3
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/app-import-error/out"
+}

@@ -1,0 +1,43 @@
+{
+  "fault_id": "missing-liveness-probe",
+  "category": "probes",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "maxunavailable_zero",
+    "probe_config",
+    "rolling_update",
+    "termination_grace_period"
+  ],
+  "expected_labels": [
+    "probe_config",
+    "liveness_probe",
+    "missing_probe"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 2,
+  "time_to_pr_ready_ms": 84866.39232200105,
+  "case_wall_ms": 97614.79124499601,
+  "report_title": "Checkout pods stuck in Terminating state during rolling update due to 400s termination grace period",
+  "cost_usd_by_tier": {
+    "nano": 0.0013369800000000002,
+    "ultra": 0.051971,
+    "tavily": null,
+    "super": 0.0182541
+  },
+  "tokens_by_tier": {
+    "nano": 15299,
+    "ultra": 36361,
+    "tavily": 0,
+    "super": 46633
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 3
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/missing-liveness-probe/out"
+}

@@ -1,0 +1,44 @@
+{
+  "fault_id": "configmap-key-typo",
+  "category": "config",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "configmap_key_typo",
+    "container_creating",
+    "deployment_manifest_error",
+    "mount_failure"
+  ],
+  "expected_labels": [
+    "config_key",
+    "config_map",
+    "volume_mount",
+    "container_creating"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 27568.614440999227,
+  "case_wall_ms": 113369.72285500087,
+  "report_title": "Checkout pod stuck in ContainerCreating due to ConfigMap key typo in deployment manifest",
+  "cost_usd_by_tier": {
+    "nano": 0.0006994799999999999,
+    "ultra": 0.023028,
+    "tavily": null,
+    "super": 0.0041291999999999995
+  },
+  "tokens_by_tier": {
+    "nano": 9267,
+    "ultra": 20538,
+    "tavily": 0,
+    "super": 10568
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/configmap-key-typo/out"
+}

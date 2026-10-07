@@ -1,0 +1,30 @@
+{
+  "fault_id": "low-memory-limit",
+  "category": "resources",
+  "status": "error",
+  "error": "JSONError: no parseable JSON value found in model reply",
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [],
+  "expected_labels": [
+    "oomkilled",
+    "memory_limit",
+    "memory_config",
+    "resource_limit"
+  ],
+  "verify_passed": false,
+  "verify_attempts": null,
+  "time_to_pr_ready_ms": null,
+  "case_wall_ms": 90753.00782200065,
+  "report_title": "",
+  "cost_usd_by_tier": {
+    "nano": 0.00153918
+  },
+  "tokens_by_tier": {
+    "nano": 22893
+  },
+  "calls_by_tier": {
+    "nano": 2
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/low-memory-limit/out"
+}

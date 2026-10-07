@@ -1,0 +1,44 @@
+{
+  "fault_id": "cpu-limit-missing",
+  "category": "resources",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "false_alarm",
+    "normal_behavior",
+    "rapid_successive_updates",
+    "rolling_update",
+    "terminating_pods_ready"
+  ],
+  "expected_labels": [
+    "resource_limit",
+    "missing_limit",
+    "resources"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 2,
+  "time_to_pr_ready_ms": 72828.97258699813,
+  "case_wall_ms": 86309.18067700259,
+  "report_title": "Checkout service pods terminating during overlapping rolling updates",
+  "cost_usd_by_tier": {
+    "nano": 0.0012842399999999999,
+    "ultra": 0.045592999999999995,
+    "tavily": null,
+    "super": 0.019683
+  },
+  "tokens_by_tier": {
+    "nano": 17387,
+    "ultra": 38237,
+    "tavily": 0,
+    "super": 52140
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 3
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/cpu-limit-missing/out"
+}

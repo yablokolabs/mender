@@ -1,0 +1,44 @@
+{
+  "fault_id": "healthcheck-bug",
+  "category": "app",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "healthcheck_bug",
+    "image_tag",
+    "probe_config",
+    "rolling_deployment"
+  ],
+  "expected_labels": [
+    "code_bug",
+    "healthcheck",
+    "probe_failure",
+    "readiness_probe"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 55217.73249300168,
+  "case_wall_ms": 144372.35631800286,
+  "report_title": "Checkout pod failing probes due to healthcheck logic bug in new deployment",
+  "cost_usd_by_tier": {
+    "nano": 0.00084132,
+    "ultra": 0.040098,
+    "tavily": null,
+    "super": 0.011653799999999999
+  },
+  "tokens_by_tier": {
+    "nano": 11754,
+    "ultra": 29946,
+    "tavily": 0,
+    "super": 30870
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 2
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/healthcheck-bug/out"
+}

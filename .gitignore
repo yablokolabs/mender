@@ -27,3 +27,4 @@ build/
 # Local scratch (eval results in results/ ARE committed)
 runs/
 *.log
+demo/videos/node_modules/

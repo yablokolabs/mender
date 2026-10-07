@@ -1,0 +1,43 @@
+{
+  "fault_id": "migration-sql-syntax",
+  "category": "migration",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "false_healthy",
+    "healthcheck_design",
+    "probe_config",
+    "readiness_liveness_conflation"
+  ],
+  "expected_labels": [
+    "migration_failure",
+    "sql_syntax",
+    "migration"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 52038.312074000714,
+  "case_wall_ms": 52307.813726998575,
+  "report_title": "Checkout service health checks validate only configuration, not database connectivity",
+  "cost_usd_by_tier": {
+    "nano": 0.00088692,
+    "ultra": 0.029823000000000002,
+    "tavily": null,
+    "super": 0.0063237
+  },
+  "tokens_by_tier": {
+    "nano": 10438,
+    "ultra": 23643,
+    "tavily": 0,
+    "super": 13159
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/migration-sql-syntax/out"
+}

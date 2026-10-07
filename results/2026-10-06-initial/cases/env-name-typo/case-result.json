@@ -1,0 +1,43 @@
+{
+  "fault_id": "env-name-typo",
+  "category": "config",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "configmap_change",
+    "missing_secret",
+    "probe_config"
+  ],
+  "expected_labels": [
+    "env_config",
+    "missing_env",
+    "env_var",
+    "crash_loop"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 29961.582162999548,
+  "case_wall_ms": 115700.17546899908,
+  "report_title": "checkout pod CrashLoopBackOff due to DB_HOSTS vs DB_HOST env var typo in deployment",
+  "cost_usd_by_tier": {
+    "nano": 0.0008817,
+    "ultra": 0.029290000000000004,
+    "tavily": null,
+    "super": 0.0043527
+  },
+  "tokens_by_tier": {
+    "nano": 11785,
+    "ultra": 26054,
+    "tavily": 0,
+    "super": 12405
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/env-name-typo/out"
+}
