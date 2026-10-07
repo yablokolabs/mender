@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
@@ -23,3 +25,21 @@ jobs:
         run: uv run mypy
       - name: Tests
         run: uv run pytest
+      - name: No commit footers or trailers
+        run: |
+          set -euo pipefail
+          violated=""
+          while read -r sha; do
+            body="$(git log --format=%B -n1 "$sha")"
+            if git interpret-trailers --parse <<< "$body" 2>/dev/null | grep -q .; then
+              violated="$violated\n  $sha: trailers"
+            fi
+            if echo "$body" | grep -qiE '^\s*(co-authored-by|generated-with|generated-by|\xf0\x9f\xa4\x8d|reviewd-by|approved-by|per [&]|sign-off|footer|codebuff|claude|cursor|wizard|chatgpt|gemini|lighthouse|generated with)'; then
+              violated="$violated\n  $sha: attribution line"
+            fi
+          done < <(git rev-list --all)
+          if [ -n "$violated" ]; then
+            echo "::error::Commit footer/trailer/attribution violation found:$violated"
+            exit 1
+          fi
+          echo "OK: no commit footers, trailers, or attribution lines."
