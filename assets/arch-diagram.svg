@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Source of assets/arch-diagram.png. Render it with `make diagram`.
+  tests/test_arch_diagram.py measures this file with rsvg-convert. Keep these rules:
+  write absolute coordinates (no transform), put one line of text in each <text>,
+  and set font-size and text-anchor as attributes on the <text> or on a parent <g>.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" width="960" height="700"
+     font-family="Liberation Sans, Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8"
+            markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#3d4f6b"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="700" fill="#f6f8fb"/>
+
+  <!-- Panels -->
+  <rect x="322" y="100" width="316" height="504" rx="12" fill="#ffffff" stroke="#76b900" stroke-width="2"/>
+  <rect x="690" y="138" width="240" height="296" rx="12" fill="#eaeef4" stroke="#c3ccd8" stroke-width="1"/>
+
+  <!-- Pipeline stages, top to bottom -->
+  <g fill="#f6f8fb" stroke="#c3ccd8" stroke-width="1">
+    <rect x="338" y="118" width="284" height="60" rx="8"/>
+    <rect x="338" y="200" width="284" height="60" rx="8"/>
+    <rect x="338" y="282" width="284" height="60" rx="8"/>
+    <rect x="338" y="364" width="284" height="60" rx="8"/>
+    <rect x="338" y="446" width="284" height="60" rx="8"/>
+    <rect x="338" y="528" width="284" height="60" rx="8"/>
+  </g>
+
+  <!-- Partners: each one is at the height of the stage that uses it -->
+  <g fill="#ffffff" stroke="#8a96a8" stroke-width="1">
+    <rect x="32" y="118" width="220" height="60" rx="8"/>
+    <rect x="32" y="282" width="220" height="60" rx="8"/>
+    <rect x="32" y="446" width="220" height="60" rx="8"/>
+    <rect x="700" y="200" width="220" height="60" rx="8"/>
+    <rect x="700" y="282" width="220" height="60" rx="8"/>
+    <rect x="700" y="364" width="220" height="60" rx="8"/>
+    <rect x="700" y="528" width="220" height="60" rx="8"/>
+    <rect x="32" y="626" width="898" height="52" rx="8"/>
+  </g>
+
+  <!-- Connectors -->
+  <g fill="none" stroke="#3d4f6b" stroke-width="1.5">
+    <line x1="252" y1="148" x2="338" y2="148" marker-end="url(#arrow)"/>
+    <line x1="252" y1="312" x2="338" y2="312" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="252" y1="476" x2="338" y2="476" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="622" y1="230" x2="700" y2="230" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="622" y1="312" x2="700" y2="312" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="622" y1="394" x2="700" y2="394" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="622" y1="558" x2="700" y2="558" marker-end="url(#arrow)"/>
+    <line x1="480" y1="178" x2="480" y2="200" marker-end="url(#arrow)"/>
+    <line x1="480" y1="260" x2="480" y2="282" marker-end="url(#arrow)"/>
+    <line x1="480" y1="342" x2="480" y2="364" marker-end="url(#arrow)"/>
+    <line x1="480" y1="424" x2="480" y2="446" marker-end="url(#arrow)"/>
+    <line x1="540" y1="446" x2="540" y2="424" marker-end="url(#arrow)"/>
+    <line x1="480" y1="506" x2="480" y2="528" marker-end="url(#arrow)"/>
+    <line x1="480" y1="604" x2="480" y2="626" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Stage numbers -->
+  <g fill="#0b1220">
+    <circle cx="364" cy="148" r="12"/>
+    <circle cx="364" cy="230" r="12"/>
+    <circle cx="364" cy="312" r="12"/>
+    <circle cx="364" cy="394" r="12"/>
+    <circle cx="364" cy="476" r="12"/>
+    <circle cx="364" cy="558" r="12"/>
+  </g>
+  <g font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">
+    <text x="364" y="152.5">1</text>
+    <text x="364" y="234.5">2</text>
+    <text x="364" y="316.5">3</text>
+    <text x="364" y="398.5">4</text>
+    <text x="364" y="480.5">5</text>
+    <text x="364" y="562.5">6</text>
+  </g>
+
+  <!-- Heading -->
+  <text x="32" y="46" font-size="22" font-weight="700" fill="#0b1220">Mender architecture</text>
+  <text x="32" y="70" font-size="13" fill="#4a5568">From a broken service to a verified pull request. A human reviews and merges it. Mender never merges.</text>
+  <text x="322" y="92" font-size="11" font-weight="700" fill="#4a5568" letter-spacing="1.2">MENDER AGENT</text>
+
+  <!-- Stage titles -->
+  <g font-size="15" font-weight="700" fill="#0b1220">
+    <text x="386" y="144">Collect evidence</text>
+    <text x="386" y="226">Triage</text>
+    <text x="386" y="308">Root cause</text>
+    <text x="386" y="390">Patch</text>
+    <text x="386" y="472">Verify</text>
+    <text x="386" y="554">Pull request</text>
+  </g>
+  <g font-size="12" fill="#4a5568">
+    <text x="386" y="163">events, pod status, logs, manifests</text>
+    <text x="386" y="245">signals and suspects</text>
+    <text x="386" y="327">report with numbered citations</text>
+    <text x="386" y="409">allowed files only</text>
+    <text x="386" y="491">run the tests, repair up to 3 times</text>
+    <text x="386" y="573">root cause, evidence, diff, test results</text>
+  </g>
+
+  <!-- Partner titles -->
+  <g font-size="14" font-weight="700" fill="#0b1220">
+    <text x="46" y="144">Kubernetes cluster</text>
+    <text x="46" y="308">Tavily web search</text>
+    <text x="46" y="472">Docker sandbox</text>
+    <text x="704" y="162">Nebius Token Factory</text>
+    <text x="714" y="226">Nemotron 3 Nano</text>
+    <text x="714" y="308">Nemotron 3 Ultra</text>
+    <text x="714" y="390">Nemotron 3 Super</text>
+    <text x="714" y="554">GitHub</text>
+    <text x="46" y="648">Usage ledger</text>
+  </g>
+  <g font-size="12" fill="#4a5568">
+    <text x="46" y="163">checkout service, namespace shop</text>
+    <text x="46" y="327">advanced depth, ranked sources</text>
+    <text x="46" y="491">no network, python:3.12-slim</text>
+    <text x="704" y="181">price per 1M tokens: input / output</text>
+    <text x="714" y="245">nano tier · $0.06 / $0.24</text>
+    <text x="714" y="327">ultra tier · $1.00 / $3.00</text>
+    <text x="714" y="409">super tier · $0.30 / $0.90</text>
+    <text x="714" y="573">a human reviews and merges</text>
+    <text x="46" y="667">Every model call and every Tavily call is recorded: tokens, latency and cost per tier.</text>
+  </g>
+
+  <!-- Connector labels -->
+  <g font-size="11" fill="#4a5568">
+    <text x="287" y="141" text-anchor="middle">kubectl</text>
+    <text x="287" y="305" text-anchor="middle">search</text>
+    <text x="287" y="469" text-anchor="middle">tests</text>
+    <text x="549" y="439">test failure</text>
+  </g>
+</svg>

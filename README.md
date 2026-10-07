@@ -197,6 +197,7 @@ For comparison, the first full eval (same cluster, before the failure-mode fixes
 
 ```bash
 make test        # uv run ruff check + ruff format --check + mypy + pytest
+make diagram     # render assets/arch-diagram.png from assets/arch-diagram.svg
 make serve       # mender serve on :8080 (GET /healthz, POST /diagnose, POST /run)
 docker build -t mender .   # python:3.12-slim + kubectl
 ```

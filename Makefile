@@ -1,6 +1,6 @@
 # Mender: Kubernetes Incident-to-Fix Agent — developer commands.
 
-.PHONY: setup test lint demo serve
+.PHONY: setup test lint demo serve diagram
 
 setup: ## one-command setup: python deps + demo cluster + images
 	uv sync --group dev
@@ -17,3 +17,6 @@ demo: ## one-command demo: one fault, failure to diagnosis to patch to sandbox t
 
 serve: ## run the HTTP service
 	uv run mender serve
+
+diagram: ## render assets/arch-diagram.png from its SVG source (needs librsvg2-bin, fonts-liberation)
+	rsvg-convert --width 1920 assets/arch-diagram.svg --output assets/arch-diagram.png

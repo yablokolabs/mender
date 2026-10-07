@@ -17,6 +17,8 @@ jobs:
           enable-cache: true
       - name: Install
         run: uv sync --group dev
+      - name: Diagram renderer and fonts
+        run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
       - name: Lint
         run: uv run ruff check src tests
       - name: Format

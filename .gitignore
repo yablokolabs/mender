@@ -28,3 +28,6 @@ build/
 runs/
 *.log
 demo/videos/node_modules/
+
+# Git worktrees for isolated feature work
+.worktrees/
