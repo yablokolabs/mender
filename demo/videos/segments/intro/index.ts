@@ -7,7 +7,9 @@ let host: HTMLElement | null = null;
 
 const flowSteps = ["Root cause", "Patch", "Sandbox test", "Pull request"]
 	.map((step) => `<div class="flow-step" data-beat="1">${step}</div>`)
-	.join(`<div class="flow-arrow" data-beat="1" aria-hidden="true">${arrowIcon}</div>`);
+	.join(
+		`<div class="flow-arrow" data-beat="1" aria-hidden="true">${arrowIcon}</div>`,
+	);
 
 export default defineSegment({
 	id: "intro",

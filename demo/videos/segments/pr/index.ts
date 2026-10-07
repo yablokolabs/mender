@@ -1,6 +1,11 @@
 import { defineSegment } from "videowright";
 import "../../components/scene.css";
-import { checkIcon, fontsReady, pipeline, playBeats } from "../../components/scene.js";
+import {
+	checkIcon,
+	fontsReady,
+	pipeline,
+	playBeats,
+} from "../../components/scene.js";
 
 let host: HTMLElement | null = null;
 
@@ -14,7 +19,10 @@ const sections = [
 	"Tavily sources used",
 	"How this was verified",
 ]
-	.map((name) => `<div class="pr-section" data-beat="0">${checkIcon}<span>${name}</span></div>`)
+	.map(
+		(name) =>
+			`<div class="pr-section" data-beat="0">${checkIcon}<span>${name}</span></div>`,
+	)
 	.join("");
 
 export default defineSegment({

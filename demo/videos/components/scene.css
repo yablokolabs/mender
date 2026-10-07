@@ -9,8 +9,16 @@
 	flex-direction: column;
 	gap: 36px;
 	background:
-		radial-gradient(1200px 700px at 88% -12%, rgba(118, 185, 0, 0.12), transparent 62%),
-		radial-gradient(1100px 700px at -5% 112%, rgba(201, 214, 234, 0.09), transparent 62%),
+		radial-gradient(
+			1200px 700px at 88% -12%,
+			rgba(118, 185, 0, 0.12),
+			transparent 62%
+		),
+		radial-gradient(
+			1100px 700px at -5% 112%,
+			rgba(201, 214, 234, 0.09),
+			transparent 62%
+		),
 		var(--color-bg);
 	color: var(--color-fg);
 	font-family: var(--font-body);

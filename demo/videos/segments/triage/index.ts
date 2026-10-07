@@ -1,6 +1,11 @@
 import { defineSegment } from "videowright";
 import "../../components/scene.css";
-import { arrowIcon, fontsReady, pipeline, playBeats } from "../../components/scene.js";
+import {
+	arrowIcon,
+	fontsReady,
+	pipeline,
+	playBeats,
+} from "../../components/scene.js";
 
 let host: HTMLElement | null = null;
 

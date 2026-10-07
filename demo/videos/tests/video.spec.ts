@@ -18,14 +18,19 @@ const projectRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const videoFolder = join(projectRoot, "videos", "demo");
 const trackModule = join(videoFolder, "audio", "tracks", "v1", "track.ts");
 const renderedVideo = join(projectRoot, "..", "mender-demo.mp4");
-const segmentIds = readdirSync(join(projectRoot, "segments"), { withFileTypes: true })
+const segmentIds = readdirSync(join(projectRoot, "segments"), {
+	withFileTypes: true,
+})
 	.filter((entry) => entry.isDirectory())
 	.map((entry) => entry.name);
 
 const MIN_FONT_PX = 20;
 
 async function loadTrack(): Promise<AudioTrack> {
-	expect(existsSync(trackModule), `audio track is missing: ${trackModule}`).toBe(true);
+	expect(
+		existsSync(trackModule),
+		`audio track is missing: ${trackModule}`,
+	).toBe(true);
 	const module = (await import(trackModule)) as { default: AudioTrack };
 	return module.default;
 }
@@ -37,7 +42,10 @@ function timelineSeconds(track: AudioTrack): number {
 	);
 }
 
-function probe(file: string): { duration: number; streams: Record<string, string>[] } {
+function probe(file: string): {
+	duration: number;
+	streams: Record<string, string>[];
+} {
 	const output = execFileSync("ffprobe", [
 		"-v",
 		"error",
@@ -56,24 +64,36 @@ function probe(file: string): { duration: number; streams: Record<string, string
 
 function collectProblems(page: Page): string[] {
 	const problems: string[] = [];
-	page.on("pageerror", (error) => problems.push(`page error: ${error.message}`));
+	page.on("pageerror", (error) =>
+		problems.push(`page error: ${error.message}`),
+	);
 	page.on("console", (message) => {
-		if (message.type() === "error") problems.push(`console error: ${message.text()}`);
+		if (message.type() === "error")
+			problems.push(`console error: ${message.text()}`);
 	});
-	page.on("requestfailed", (request) => problems.push(`request failed: ${request.url()}`));
+	page.on("requestfailed", (request) =>
+		problems.push(`request failed: ${request.url()}`),
+	);
 	page.on("response", (response) => {
-		if (response.status() >= 400) problems.push(`HTTP ${response.status()}: ${response.url()}`);
+		if (response.status() >= 400)
+			problems.push(`HTTP ${response.status()}: ${response.url()}`);
 	});
 	return problems;
 }
 
 function playerStatus(page: Page): Promise<string> {
-	return page.evaluate(() => `${document.body.dataset.vwSegment}:${document.body.dataset.vwState}`);
+	return page.evaluate(
+		() => `${document.body.dataset.vwSegment}:${document.body.dataset.vwState}`,
+	);
 }
 
 async function animationsToFinish(page: Page): Promise<void> {
 	await page.evaluate(() =>
-		Promise.all(document.getAnimations().map((animation) => animation.finished.catch(() => null))),
+		Promise.all(
+			document
+				.getAnimations()
+				.map((animation) => animation.finished.catch(() => null)),
+		),
 	);
 }
 
@@ -92,11 +112,20 @@ function inspectFrame(page: Page, minFontPx: number) {
 		const outsideFrame: string[] = [];
 		const clipped: string[] = [];
 		const tooSmall: string[] = [];
-		const elements = slot?.querySelectorAll<HTMLElement>(".vw-slot-content *") ?? [];
+		const elements =
+			slot?.querySelectorAll<HTMLElement>(".vw-slot-content *") ?? [];
 		for (const element of elements) {
-			if (element.tagName === "STYLE" || element.closest("[aria-hidden='true']")) continue;
+			if (
+				element.tagName === "STYLE" ||
+				element.closest("[aria-hidden='true']")
+			)
+				continue;
 			const style = getComputedStyle(element);
-			if (style.opacity === "0" || style.visibility === "hidden" || style.display === "none") {
+			if (
+				style.opacity === "0" ||
+				style.visibility === "hidden" ||
+				style.display === "none"
+			) {
 				invisible.push(label(element));
 				continue;
 			}
@@ -124,12 +153,20 @@ function inspectFrame(page: Page, minFontPx: number) {
 				tooSmall.push(`${label(element)} (${style.fontSize})`);
 			}
 		}
-		return { elementCount: elements.length, invisible, outsideFrame, clipped, tooSmall };
+		return {
+			elementCount: elements.length,
+			invisible,
+			outsideFrame,
+			clipped,
+			tooSmall,
+		};
 	}, minFontPx);
 }
 
 for (const id of segmentIds) {
-	test(`${id}: every beat plays and all content can be read on the frame`, async ({ page }) => {
+	test(`${id}: every beat plays and all content can be read on the frame`, async ({
+		page,
+	}) => {
 		const problems = collectProblems(page);
 		await page.goto(`/video/demo?hideHud=1#/${id}/0`);
 		await page.waitForFunction(() => window.__VW_PLAYER_READY__ === true);
@@ -140,27 +177,38 @@ for (const id of segmentIds) {
 		const order = Object.keys(advances);
 		const presses = advances[id].length;
 		const track = await loadTrack();
-		expect(track.timing.perSegment[id], "audio track timing and segment advances").toEqual(
-			advances[id],
-		);
+		expect(
+			track.timing.perSegment[id],
+			"audio track timing and segment advances",
+		).toEqual(advances[id]);
 
 		for (let press = 1; press < presses; press++) {
 			await page.keyboard.press("ArrowRight");
 			await animationsToFinish(page);
-			expect(await playerStatus(page), `after press ${press} of ${presses}`).toBe(`${id}:playing`);
+			expect(
+				await playerStatus(page),
+				`after press ${press} of ${presses}`,
+			).toBe(`${id}:playing`);
 		}
 
 		const frame = await inspectFrame(page, MIN_FONT_PX);
 		expect(frame.elementCount, "elements on the frame").toBeGreaterThan(0);
-		expect(frame.invisible, "content that is still invisible at the last beat").toEqual([]);
-		expect(frame.outsideFrame, "content outside the 1920x1080 frame").toEqual([]);
+		expect(
+			frame.invisible,
+			"content that is still invisible at the last beat",
+		).toEqual([]);
+		expect(frame.outsideFrame, "content outside the 1920x1080 frame").toEqual(
+			[],
+		);
 		expect(frame.clipped, "content cut off by its container").toEqual([]);
 		expect(frame.tooSmall, `text smaller than ${MIN_FONT_PX}px`).toEqual([]);
 
 		await page.keyboard.press("ArrowRight");
 		const next = order[order.indexOf(id) + 1];
 		await expect
-			.poll(() => playerStatus(page), { message: `press ${presses} must end the segment` })
+			.poll(() => playerStatus(page), {
+				message: `press ${presses} must end the segment`,
+			})
 			.toBe(next ? `${next}:playing` : `${id}:ended`);
 		expect(problems).toEqual([]);
 	});
@@ -178,7 +226,9 @@ test("the committed MP4 is the 1080p render of this timeline, with the narration
 	const video = probe(renderedVideo);
 	const kinds = video.streams.map((stream) => stream.codec_type);
 	expect(kinds).toContain("audio");
-	expect(video.streams.find((stream) => stream.codec_type === "video")).toMatchObject({
+	expect(
+		video.streams.find((stream) => stream.codec_type === "video"),
+	).toMatchObject({
 		width: 1920,
 		height: 1080,
 	});

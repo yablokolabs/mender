@@ -6,7 +6,11 @@ let host: HTMLElement | null = null;
 
 // The three sources that the committed root-cause report cites as [1], [6] and [11].
 const citations = [
-	["[1]", "devopsboys.com", "Kubernetes CrashLoopBackOff After Changing Resource Limits"],
+	[
+		"[1]",
+		"devopsboys.com",
+		"Kubernetes CrashLoopBackOff After Changing Resource Limits",
+	],
 	["[6]", "medium.com", "Why Pods Get OOMKilled in Kubernetes"],
 	["[11]", "cast.ai", "OOMKilled (Exit Code 137): Causes and How to Fix It"],
 ]

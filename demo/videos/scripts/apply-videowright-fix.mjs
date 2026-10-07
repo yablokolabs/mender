@@ -11,7 +11,8 @@ const projectRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const packageSrc = join(projectRoot, "node_modules", "videowright", "src");
 const missingModules = {
 	"index.js": 'export * from "../dist/index.js";\n',
-	"timeline/resolveTiming.js": 'export * from "../../dist/timeline/resolveTiming.js";\n',
+	"timeline/resolveTiming.js":
+		'export * from "../../dist/timeline/resolveTiming.js";\n',
 };
 
 for (const [file, content] of Object.entries(missingModules)) {

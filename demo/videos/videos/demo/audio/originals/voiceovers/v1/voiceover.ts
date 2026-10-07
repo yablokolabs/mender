@@ -20,7 +20,8 @@ const voiceover: Voiceover = {
 			outro: [4.7667, 8.4333],
 		},
 	},
-	notes: "Lily: British English, female, warm and steady. Model eleven_multilingual_v2.",
+	notes:
+		"Lily: British English, female, warm and steady. Model eleven_multilingual_v2.",
 };
 
 export default voiceover;

@@ -13,7 +13,14 @@ const FONT_FACES = [
 	'500 32px "JetBrains Mono"',
 ];
 
-const STAGES = ["Evidence", "Triage", "Root cause", "Patch", "Verify", "Pull request"];
+const STAGES = [
+	"Evidence",
+	"Triage",
+	"Root cause",
+	"Patch",
+	"Verify",
+	"Pull request",
+];
 
 /** Resolves when each font face of the style is loaded, so no frame shows a fallback font. */
 export function fontsReady(): Promise<unknown> {
@@ -29,7 +36,12 @@ function revealBeat(root: HTMLElement, beat: number): void {
 				{ opacity: 0, transform: "translateY(24px)" },
 				{ opacity: 1, transform: "translateY(0)" },
 			],
-			{ duration: REVEAL_MS, delay: index * STAGGER_MS, easing: EASE_OUT, fill: "forwards" },
+			{
+				duration: REVEAL_MS,
+				delay: index * STAGGER_MS,
+				easing: EASE_OUT,
+				fill: "forwards",
+			},
 		);
 	});
 }
@@ -39,9 +51,12 @@ function revealBeat(root: HTMLElement, beat: number): void {
  * Beat 0 shows at once. Each later beat waits for the next advance, so a scene with
  * beats 0 to N needs N + 1 entries in `advances`: N reveals and the end of the segment.
  */
-export async function playBeats(ctx: PlayerContext, root: HTMLElement): Promise<void> {
-	const beats = [...root.querySelectorAll<HTMLElement>("[data-beat]")].map((element) =>
-		Number(element.dataset.beat),
+export async function playBeats(
+	ctx: PlayerContext,
+	root: HTMLElement,
+): Promise<void> {
+	const beats = [...root.querySelectorAll<HTMLElement>("[data-beat]")].map(
+		(element) => Number(element.dataset.beat),
 	);
 	revealBeat(root, 0);
 	for (let beat = 1; beat <= Math.max(...beats); beat++) {
