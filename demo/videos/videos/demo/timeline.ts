@@ -1,29 +1,23 @@
-import type { Timeline } from 'videowright';
-import '../../styles/onme/tokens.css';
-import intro from './segments/intro/index.js';
-import setup from './segments/setup/index.js';
-import fault from './segments/fault/index.js';
-import triage from './segments/triage/index.js';
-import diagnosis from './segments/diagnosis/index.js';
-import patch from './segments/patch/index.js';
-import sandbox from './segments/sandbox/index.js';
-import pr from './segments/pr/index.js';
-import outro from './segments/outro/index.js';
+import "../../styles/mender/tokens.css";
+import type { Timeline } from "videowright";
+import defaultAudioTrack from "./audio/tracks/v1/track.js";
 
-export default {
-  meta: {
-    title: 'Mender demo — from broken service to verified PR',
-    style: 'onme',
-  },
-  segments: [
-    intro,
-    setup,
-    fault,
-    triage,
-    diagnosis,
-    patch,
-    sandbox,
-    pr,
-    outro,
-  ],
-} satisfies Timeline;
+const timeline: Timeline = {
+	meta: {
+		title: "Mender demo: from a broken service to a verified pull request",
+	},
+	segments: [
+		{ id: "intro" },
+		{ id: "setup", transition: "fade" },
+		{ id: "fault", transition: "fade" },
+		{ id: "triage", transition: "fade" },
+		{ id: "diagnosis", transition: "fade" },
+		{ id: "patch", transition: "fade" },
+		{ id: "sandbox", transition: "fade" },
+		{ id: "pr", transition: "fade" },
+		{ id: "outro", transition: "fade" },
+	],
+	default_audio_track: defaultAudioTrack,
+};
+
+export default timeline;

@@ -31,3 +31,7 @@ demo/videos/node_modules/
 
 # Git worktrees for isolated feature work
 .worktrees/
+
+# Video project: test and render output
+demo/videos/test-results/
+demo/videos/output.mp4
