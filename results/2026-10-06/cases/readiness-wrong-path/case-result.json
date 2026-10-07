@@ -1,0 +1,42 @@
+{
+  "fault_id": "readiness-wrong-path",
+  "category": "probes",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "manifest_drift",
+    "missing_endpoint",
+    "probe_config"
+  ],
+  "expected_labels": [
+    "readiness_probe",
+    "probe_config",
+    "probe_path"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 59384.65196499601,
+  "case_wall_ms": 145134.6761820023,
+  "report_title": "Checkout pod failing readiness probe due to missing /ready endpoint after manifest change",
+  "cost_usd_by_tier": {
+    "nano": 0.0009795,
+    "ultra": 0.036535,
+    "tavily": null,
+    "super": 0.0045804
+  },
+  "tokens_by_tier": {
+    "nano": 14393,
+    "ultra": 32261,
+    "tavily": 0,
+    "super": 13034
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/readiness-wrong-path/out"
+}

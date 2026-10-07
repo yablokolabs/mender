@@ -1,0 +1,43 @@
+{
+  "fault_id": "liveness-wrong-port",
+  "category": "probes",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "crash_loop",
+    "liveness_probe",
+    "port_mismatch",
+    "probe_config"
+  ],
+  "expected_labels": [
+    "liveness_probe",
+    "probe_config",
+    "probe_port"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 27545.550631999504,
+  "case_wall_ms": 65371.15248100599,
+  "report_title": "Checkout pods crash-looping due to liveness probe targeting wrong port (9090 vs 8080)",
+  "cost_usd_by_tier": {
+    "nano": 0.00084666,
+    "ultra": 0.029505,
+    "tavily": null,
+    "super": 0.004251
+  },
+  "tokens_by_tier": {
+    "nano": 11186,
+    "ultra": 25531,
+    "tavily": 0,
+    "super": 11924
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/liveness-wrong-port/out"
+}

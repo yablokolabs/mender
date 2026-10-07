@@ -1,0 +1,43 @@
+{
+  "fault_id": "missing-secret",
+  "category": "secret",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "createcontainerconfigerror",
+    "deployment_config_error",
+    "missing_secret",
+    "secret_name_mismatch"
+  ],
+  "expected_labels": [
+    "missing_secret",
+    "secret_config",
+    "createcontainerconfigerror"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 57186.15702600073,
+  "case_wall_ms": 142931.4611860027,
+  "report_title": "checkout pod CreateContainerConfigError due to missing secret checkout-secrets-x",
+  "cost_usd_by_tier": {
+    "nano": 0.00078996,
+    "ultra": 0.026869999999999998,
+    "tavily": null,
+    "super": 0.0038925
+  },
+  "tokens_by_tier": {
+    "nano": 11264,
+    "ultra": 25090,
+    "tavily": 0,
+    "super": 11757
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/missing-secret/out"
+}

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "attempts": 1,
+  "command": [
+    "python3",
+    "demo/app/check.py"
+  ],
+  "changed_files": [],
+  "attempt_log": [
+    {
+      "attempt": 1,
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 715.6447020024643,
+      "passed": true,
+      "output_tail": "PASS check_memory_limit\nPASS check_cpu_limit_present\nPASS check_cpu_request_sane\nPASS check_replicas\nPASS check_image_tag\nPASS check_readiness_probe\nPASS check_liveness_probe\nPASS check_container_port\nPASS check_secret_env_ref\nPASS check_db_env_ref\nPASS check_config_mount\nPASS check_selector_match\nPASS check_service_selector_and_ports\nPASS check_configmap_values\nPASS check_secret_value\nPASS check_migration_executes\nPASS check_migration_schema\nPASS check_service_parses_amounts\nPASS check_service_healthcheck_logic\nPASS check_service_env_validation\nPASS check_service_config_validation\n21/21 checks passed"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "fault_id": "migration-missing-column",
+  "category": "migration",
+  "status": "error",
+  "error": "PatchError: patch path outside allowed set: demo/manifests/deploy.yaml",
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [],
+  "expected_labels": [
+    "migration_failure",
+    "schema_mismatch",
+    "missing_column",
+    "migration"
+  ],
+  "verify_passed": false,
+  "verify_attempts": null,
+  "time_to_pr_ready_ms": null,
+  "case_wall_ms": 67914.77384899918,
+  "report_title": "",
+  "cost_usd_by_tier": {
+    "nano": 0.00135636,
+    "ultra": 0.053287,
+    "tavily": null,
+    "super": 0.0074661
+  },
+  "tokens_by_tier": {
+    "nano": 15019,
+    "ultra": 36117,
+    "tavily": 0,
+    "super": 16365
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/migration-missing-column/out"
+}

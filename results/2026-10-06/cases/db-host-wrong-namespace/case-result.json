@@ -1,0 +1,45 @@
+{
+  "fault_id": "db-host-wrong-namespace",
+  "category": "config",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "configmap_error",
+    "healthcheck_validation",
+    "probe_failure",
+    "restart_loop",
+    "wrong_db_host"
+  ],
+  "expected_labels": [
+    "db_config",
+    "config_value",
+    "healthcheck",
+    "wrong_namespace"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 29950.089347999892,
+  "case_wall_ms": 115675.42234200664,
+  "report_title": "Checkout pod restart loop due to ConfigMap DB_HOST misconfiguration causing healthcheck failures",
+  "cost_usd_by_tier": {
+    "nano": 0.0010004999999999999,
+    "ultra": 0.035095,
+    "tavily": null,
+    "super": 0.0038154
+  },
+  "tokens_by_tier": {
+    "nano": 12394,
+    "ultra": 28533,
+    "tavily": 0,
+    "super": 11782
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/db-host-wrong-namespace/out"
+}

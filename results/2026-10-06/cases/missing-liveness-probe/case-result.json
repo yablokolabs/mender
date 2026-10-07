@@ -1,0 +1,44 @@
+{
+  "fault_id": "missing-liveness-probe",
+  "category": "probes",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "deployment",
+    "finalizer_issue",
+    "pod_stuck_terminating",
+    "prestop_hook",
+    "rolling_update"
+  ],
+  "expected_labels": [
+    "probe_config",
+    "liveness_probe",
+    "missing_probe"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 3,
+  "time_to_pr_ready_ms": 90282.57323699654,
+  "case_wall_ms": 102696.02712000051,
+  "report_title": "Checkout pods stuck in Terminating state during rolling deployment update",
+  "cost_usd_by_tier": {
+    "nano": 0.00129894,
+    "ultra": 0.034829000000000006,
+    "tavily": null,
+    "super": 0.022229699999999998
+  },
+  "tokens_by_tier": {
+    "nano": 15655,
+    "ultra": 31725,
+    "tavily": 0,
+    "super": 50771
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 3
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/missing-liveness-probe/out"
+}

@@ -1,0 +1,44 @@
+{
+  "fault_id": "service-selector-mismatch",
+  "category": "networking",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "deployment_controller",
+    "graceful_termination",
+    "normal_behavior",
+    "rolling_update"
+  ],
+  "expected_labels": [
+    "service_selector",
+    "selector_mismatch",
+    "traffic_routing",
+    "no_endpoints"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 39480.672532001336,
+  "case_wall_ms": 77691.76831600635,
+  "report_title": "Checkout pod terminated during normal rolling update deployment",
+  "cost_usd_by_tier": {
+    "nano": 0.00100518,
+    "ultra": 0.035196,
+    "tavily": null,
+    "super": 0.0039612
+  },
+  "tokens_by_tier": {
+    "nano": 11749,
+    "ultra": 27076,
+    "tavily": 0,
+    "super": 11304
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/service-selector-mismatch/out"
+}

@@ -1,0 +1,44 @@
+{
+  "fault_id": "secret-key-ref-wrong",
+  "category": "secret",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "createcontainerconfigerror",
+    "deployment_config_error",
+    "missing_secret_key",
+    "secret_key_mismatch"
+  ],
+  "expected_labels": [
+    "secret_key",
+    "secret_config",
+    "createcontainerconfigerror",
+    "missing_key"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 23929.726066999137,
+  "case_wall_ms": 109697.545307994,
+  "report_title": "checkout pods fail CreateContainerConfigError due to missing secret key 'token'",
+  "cost_usd_by_tier": {
+    "nano": 0.00131748,
+    "ultra": 0.022779,
+    "tavily": null,
+    "super": 0.0033231
+  },
+  "tokens_by_tier": {
+    "nano": 18580,
+    "ultra": 20883,
+    "tavily": 0,
+    "super": 9757
+  },
+  "calls_by_tier": {
+    "nano": 2,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/secret-key-ref-wrong/out"
+}

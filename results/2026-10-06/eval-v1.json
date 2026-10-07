@@ -1,0 +1,1055 @@
+{
+  "schema_version": "mender-eval-v1",
+  "started_at": "2026-10-06T19:10:18+00:00",
+  "finished_at": "2026-10-06T20:02:17+00:00",
+  "pr_mode": "prepare",
+  "settle_s": 25.0,
+  "sandbox_image": "mender-demo-test:latest",
+  "cases": [
+    {
+      "fault_id": "app-import-error",
+      "category": "app",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "crashloopbackoff",
+        "image_version_mismatch",
+        "late_future_import",
+        "syntax_error"
+      ],
+      "expected_labels": [
+        "import_error",
+        "module_not_found",
+        "code_bug",
+        "crash_loop"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 2,
+      "time_to_pr_ready_ms": 176535.12479500205,
+      "case_wall_ms": 270019.2856939975,
+      "report_title": "checkout pod CrashLoopBackOff due to misplaced __future__ import in service.py",
+      "cost_usd_by_tier": {
+        "nano": 0.00097392,
+        "ultra": 0.036048,
+        "tavily": null,
+        "super": 0.0186705
+      },
+      "tokens_by_tier": {
+        "nano": 14390,
+        "ultra": 31916,
+        "tavily": 0,
+        "super": 37919
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 2
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/app-import-error/out"
+    },
+    {
+      "fault_id": "bad-image-tag",
+      "category": "images",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "deployment_config",
+        "image_pull_failure",
+        "image_tag"
+      ],
+      "expected_labels": [
+        "image_tag",
+        "image_pull",
+        "imagepullbackoff",
+        "image_config"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 25447.964090002642,
+      "case_wall_ms": 111259.99991000572,
+      "report_title": "checkout deployment uses non-existent image tag 1.9.9 causing ImagePullBackOff",
+      "cost_usd_by_tier": {
+        "nano": 0.00070608,
+        "ultra": 0.026992,
+        "tavily": null,
+        "super": 0.0037625999999999996
+      },
+      "tokens_by_tier": {
+        "nano": 10223,
+        "ultra": 23822,
+        "tavily": 0,
+        "super": 11020
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/bad-image-tag/out"
+    },
+    {
+      "fault_id": "configmap-key-typo",
+      "category": "config",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "configmap_key_typo",
+        "container_creating",
+        "rolling_update",
+        "volume_mount_failure"
+      ],
+      "expected_labels": [
+        "config_key",
+        "config_map",
+        "volume_mount",
+        "container_creating"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 28590.93369299808,
+      "case_wall_ms": 114367.87933199957,
+      "report_title": "Checkout pod stuck in ContainerCreating due to ConfigMap key typo",
+      "cost_usd_by_tier": {
+        "nano": 0.00153264,
+        "ultra": 0.026933,
+        "tavily": null,
+        "super": 0.0044781
+      },
+      "tokens_by_tier": {
+        "nano": 22478,
+        "ultra": 24825,
+        "tavily": 0,
+        "super": 12373
+      },
+      "calls_by_tier": {
+        "nano": 2,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/configmap-key-typo/out"
+    },
+    {
+      "fault_id": "configmap-mount-path",
+      "category": "config",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "config_file_missing",
+        "configmap_path",
+        "crashloopbackoff",
+        "deployment_rollback",
+        "volume_mount_mismatch"
+      ],
+      "expected_labels": [
+        "volume_mount",
+        "config_map",
+        "mount_path",
+        "config_not_found"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 46519.43453300191,
+      "case_wall_ms": 132267.59826999478,
+      "report_title": "Checkout pod crashloop due to ConfigMap volume mount path mismatch (/etc/config vs /etc/app)",
+      "cost_usd_by_tier": {
+        "nano": 0.00089622,
+        "ultra": 0.029426,
+        "tavily": null,
+        "super": 0.0046269
+      },
+      "tokens_by_tier": {
+        "nano": 11892,
+        "ultra": 26162,
+        "tavily": 0,
+        "super": 12789
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/configmap-mount-path/out"
+    },
+    {
+      "fault_id": "cpu-limit-missing",
+      "category": "resources",
+      "status": "verify-failed",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "probe_config"
+      ],
+      "expected_labels": [
+        "resource_limit",
+        "missing_limit",
+        "resources"
+      ],
+      "verify_passed": false,
+      "verify_attempts": 4,
+      "time_to_pr_ready_ms": null,
+      "case_wall_ms": 196464.54038299999,
+      "report_title": "Checkout pods stuck in Terminating state during rolling update",
+      "cost_usd_by_tier": {
+        "nano": 0.0017124599999999999,
+        "ultra": 0.05190000000000001,
+        "tavily": null,
+        "super": 0.0352431
+      },
+      "tokens_by_tier": {
+        "nano": 19175,
+        "ultra": 40524,
+        "tavily": 0,
+        "super": 79525
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 4
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/cpu-limit-missing/out"
+    },
+    {
+      "fault_id": "cpu-request-too-high",
+      "category": "scheduling",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "cpu_request_excessive",
+        "insufficient_cpu",
+        "manifest_misconfig",
+        "scheduling_failure"
+      ],
+      "expected_labels": [
+        "resource_request",
+        "scheduling",
+        "pending",
+        "insufficient_cpu"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 29273.7860979978,
+      "case_wall_ms": 115009.64903600106,
+      "report_title": "Checkout pod stuck Pending due to excessive CPU request (32 cores) exceeding single-node capacity",
+      "cost_usd_by_tier": {
+        "nano": 0.00083694,
+        "ultra": 0.028286,
+        "tavily": null,
+        "super": 0.0043314
+      },
+      "tokens_by_tier": {
+        "nano": 11231,
+        "ultra": 25012,
+        "tavily": 0,
+        "super": 12062
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/cpu-request-too-high/out"
+    },
+    {
+      "fault_id": "db-host-wrong-namespace",
+      "category": "config",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "configmap_error",
+        "healthcheck_validation",
+        "probe_failure",
+        "restart_loop",
+        "wrong_db_host"
+      ],
+      "expected_labels": [
+        "db_config",
+        "config_value",
+        "healthcheck",
+        "wrong_namespace"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 29950.089347999892,
+      "case_wall_ms": 115675.42234200664,
+      "report_title": "Checkout pod restart loop due to ConfigMap DB_HOST misconfiguration causing healthcheck failures",
+      "cost_usd_by_tier": {
+        "nano": 0.0010004999999999999,
+        "ultra": 0.035095,
+        "tavily": null,
+        "super": 0.0038154
+      },
+      "tokens_by_tier": {
+        "nano": 12394,
+        "ultra": 28533,
+        "tavily": 0,
+        "super": 11782
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/db-host-wrong-namespace/out"
+    },
+    {
+      "fault_id": "env-name-typo",
+      "category": "config",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "config_map_key_ref",
+        "crashloopbackoff",
+        "deployment_manifest_bug",
+        "env_var_typo",
+        "missing_env_var"
+      ],
+      "expected_labels": [
+        "env_config",
+        "missing_env",
+        "env_var",
+        "crash_loop"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 30066.073059999326,
+      "case_wall_ms": 115833.8440209991,
+      "report_title": "checkout pod CrashLoopBackOff due to DB_HOSTS vs DB_HOST env var name mismatch",
+      "cost_usd_by_tier": {
+        "nano": 0.00082134,
+        "ultra": 0.029121,
+        "tavily": null,
+        "super": 0.004446
+      },
+      "tokens_by_tier": {
+        "nano": 11565,
+        "ultra": 26057,
+        "tavily": 0,
+        "super": 12532
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/env-name-typo/out"
+    },
+    {
+      "fault_id": "healthcheck-bug",
+      "category": "app",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "bad_build",
+        "health_check_failure",
+        "mutable_image_tag",
+        "oomkilled",
+        "rollout_issue"
+      ],
+      "expected_labels": [
+        "code_bug",
+        "healthcheck",
+        "probe_failure",
+        "readiness_probe"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 78043.8044879993,
+      "case_wall_ms": 166381.66746600473,
+      "report_title": "Checkout pod crash due to mutable image tag deploying defective build",
+      "cost_usd_by_tier": {
+        "nano": 0.0009734399999999999,
+        "ultra": 0.035223,
+        "tavily": null,
+        "super": 0.008535599999999999
+      },
+      "tokens_by_tier": {
+        "nano": 12312,
+        "ultra": 27957,
+        "tavily": 0,
+        "super": 17862
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/healthcheck-bug/out"
+    },
+    {
+      "fault_id": "invalid-log-level",
+      "category": "config",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "configmap_error",
+        "crash_loop",
+        "exit_code_1",
+        "invalid_yaml",
+        "probe_config"
+      ],
+      "expected_labels": [
+        "config_value",
+        "invalid_config",
+        "log_level",
+        "crash_loop"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 33476.179398996464,
+      "case_wall_ms": 119236.47817500023,
+      "report_title": "Checkout pod crash loop due to invalid log_level in ConfigMap",
+      "cost_usd_by_tier": {
+        "nano": 0.000882,
+        "ultra": 0.037343,
+        "tavily": null,
+        "super": 0.0038079000000000003
+      },
+      "tokens_by_tier": {
+        "nano": 11703,
+        "ultra": 28415,
+        "tavily": 0,
+        "super": 11531
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/invalid-log-level/out"
+    },
+    {
+      "fault_id": "liveness-wrong-port",
+      "category": "probes",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "crash_loop",
+        "liveness_probe",
+        "port_mismatch",
+        "probe_config"
+      ],
+      "expected_labels": [
+        "liveness_probe",
+        "probe_config",
+        "probe_port"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 27545.550631999504,
+      "case_wall_ms": 65371.15248100599,
+      "report_title": "Checkout pods crash-looping due to liveness probe targeting wrong port (9090 vs 8080)",
+      "cost_usd_by_tier": {
+        "nano": 0.00084666,
+        "ultra": 0.029505,
+        "tavily": null,
+        "super": 0.004251
+      },
+      "tokens_by_tier": {
+        "nano": 11186,
+        "ultra": 25531,
+        "tavily": 0,
+        "super": 11924
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/liveness-wrong-port/out"
+    },
+    {
+      "fault_id": "low-memory-limit",
+      "category": "resources",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "cache_sizing",
+        "deployment_mismatch",
+        "exit_code_137",
+        "memory_limit",
+        "oomkilled"
+      ],
+      "expected_labels": [
+        "oomkilled",
+        "memory_limit",
+        "memory_config",
+        "resource_limit"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 24978.605967997282,
+      "case_wall_ms": 110696.0424390054,
+      "report_title": "checkout pod OOMKilled due to 64Mi memory limit below 96Mi startup cache requirement",
+      "cost_usd_by_tier": {
+        "nano": 0.0008210399999999999,
+        "ultra": 0.029324999999999997,
+        "tavily": null,
+        "super": 0.0045618
+      },
+      "tokens_by_tier": {
+        "nano": 11686,
+        "ultra": 26429,
+        "tavily": 0,
+        "super": 12794
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/low-memory-limit/out"
+    },
+    {
+      "fault_id": "migration-missing-column",
+      "category": "migration",
+      "status": "error",
+      "error": "PatchError: patch path outside allowed set: demo/manifests/deploy.yaml",
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [],
+      "expected_labels": [
+        "migration_failure",
+        "schema_mismatch",
+        "missing_column",
+        "migration"
+      ],
+      "verify_passed": false,
+      "verify_attempts": null,
+      "time_to_pr_ready_ms": null,
+      "case_wall_ms": 67914.77384899918,
+      "report_title": "",
+      "cost_usd_by_tier": {
+        "nano": 0.00135636,
+        "ultra": 0.053287,
+        "tavily": null,
+        "super": 0.0074661
+      },
+      "tokens_by_tier": {
+        "nano": 15019,
+        "ultra": 36117,
+        "tavily": 0,
+        "super": 16365
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/migration-missing-column/out"
+    },
+    {
+      "fault_id": "migration-sql-syntax",
+      "category": "migration",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "memory_limit",
+        "memory_request",
+        "oomkilled",
+        "scheduling",
+        "startup_cache"
+      ],
+      "expected_labels": [
+        "migration_failure",
+        "sql_syntax",
+        "migration"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 82256.0076850059,
+      "case_wall_ms": 82490.41612200381,
+      "report_title": "Checkout pod OOM kill risk due to memory request undersized vs startup cache",
+      "cost_usd_by_tier": {
+        "nano": 0.00093132,
+        "ultra": 0.058661000000000005,
+        "tavily": null,
+        "super": 0.0079584
+      },
+      "tokens_by_tier": {
+        "nano": 10638,
+        "ultra": 33459,
+        "tavily": 0,
+        "super": 15014
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/migration-sql-syntax/out"
+    },
+    {
+      "fault_id": "missing-liveness-probe",
+      "category": "probes",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "deployment",
+        "finalizer_issue",
+        "pod_stuck_terminating",
+        "prestop_hook",
+        "rolling_update"
+      ],
+      "expected_labels": [
+        "probe_config",
+        "liveness_probe",
+        "missing_probe"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 3,
+      "time_to_pr_ready_ms": 90282.57323699654,
+      "case_wall_ms": 102696.02712000051,
+      "report_title": "Checkout pods stuck in Terminating state during rolling deployment update",
+      "cost_usd_by_tier": {
+        "nano": 0.00129894,
+        "ultra": 0.034829000000000006,
+        "tavily": null,
+        "super": 0.022229699999999998
+      },
+      "tokens_by_tier": {
+        "nano": 15655,
+        "ultra": 31725,
+        "tavily": 0,
+        "super": 50771
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 3
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/missing-liveness-probe/out"
+    },
+    {
+      "fault_id": "missing-secret",
+      "category": "secret",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "createcontainerconfigerror",
+        "deployment_config_error",
+        "missing_secret",
+        "secret_name_mismatch"
+      ],
+      "expected_labels": [
+        "missing_secret",
+        "secret_config",
+        "createcontainerconfigerror"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 57186.15702600073,
+      "case_wall_ms": 142931.4611860027,
+      "report_title": "checkout pod CreateContainerConfigError due to missing secret checkout-secrets-x",
+      "cost_usd_by_tier": {
+        "nano": 0.00078996,
+        "ultra": 0.026869999999999998,
+        "tavily": null,
+        "super": 0.0038925
+      },
+      "tokens_by_tier": {
+        "nano": 11264,
+        "ultra": 25090,
+        "tavily": 0,
+        "super": 11757
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/missing-secret/out"
+    },
+    {
+      "fault_id": "parse-amount-bug",
+      "category": "app",
+      "status": "error",
+      "error": "PatchError: patch path outside allowed set: demo/manifests/deploy.yaml",
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [],
+      "expected_labels": [
+        "code_bug",
+        "logic_error",
+        "parse_error",
+        "wrong_amount"
+      ],
+      "verify_passed": false,
+      "verify_attempts": null,
+      "time_to_pr_ready_ms": null,
+      "case_wall_ms": 98967.0413950007,
+      "report_title": "",
+      "cost_usd_by_tier": {
+        "nano": 0.0010656,
+        "ultra": 0.045144000000000004,
+        "tavily": null,
+        "super": 0.0230718
+      },
+      "tokens_by_tier": {
+        "nano": 14235,
+        "ultra": 34186,
+        "tavily": 0,
+        "super": 47566
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 2
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/parse-amount-bug/out"
+    },
+    {
+      "fault_id": "readiness-wrong-path",
+      "category": "probes",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "manifest_drift",
+        "missing_endpoint",
+        "probe_config"
+      ],
+      "expected_labels": [
+        "readiness_probe",
+        "probe_config",
+        "probe_path"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 59384.65196499601,
+      "case_wall_ms": 145134.6761820023,
+      "report_title": "Checkout pod failing readiness probe due to missing /ready endpoint after manifest change",
+      "cost_usd_by_tier": {
+        "nano": 0.0009795,
+        "ultra": 0.036535,
+        "tavily": null,
+        "super": 0.0045804
+      },
+      "tokens_by_tier": {
+        "nano": 14393,
+        "ultra": 32261,
+        "tavily": 0,
+        "super": 13034
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/readiness-wrong-path/out"
+    },
+    {
+      "fault_id": "replicas-zero",
+      "category": "scaling",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "deployment_scale_down",
+        "intentional_termination",
+        "manifest_misconfig",
+        "replica_count_zero"
+      ],
+      "expected_labels": [
+        "replica_count",
+        "scaling",
+        "replicas",
+        "no_pods"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 27270.459824998397,
+      "case_wall_ms": 53051.063263003016,
+      "report_title": "Checkout deployment scaled to zero replicas causing pod termination",
+      "cost_usd_by_tier": {
+        "nano": 0.0009480000000000001,
+        "ultra": 0.030268999999999997,
+        "tavily": null,
+        "super": 0.004164
+      },
+      "tokens_by_tier": {
+        "nano": 13097,
+        "ultra": 28085,
+        "tavily": 0,
+        "super": 12350
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/replicas-zero/out"
+    },
+    {
+      "fault_id": "secret-key-ref-wrong",
+      "category": "secret",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": true,
+      "predicted_labels": [
+        "createcontainerconfigerror",
+        "deployment_config_error",
+        "missing_secret_key",
+        "secret_key_mismatch"
+      ],
+      "expected_labels": [
+        "secret_key",
+        "secret_config",
+        "createcontainerconfigerror",
+        "missing_key"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 23929.726066999137,
+      "case_wall_ms": 109697.545307994,
+      "report_title": "checkout pods fail CreateContainerConfigError due to missing secret key 'token'",
+      "cost_usd_by_tier": {
+        "nano": 0.00131748,
+        "ultra": 0.022779,
+        "tavily": null,
+        "super": 0.0033231
+      },
+      "tokens_by_tier": {
+        "nano": 18580,
+        "ultra": 20883,
+        "tavily": 0,
+        "super": 9757
+      },
+      "calls_by_tier": {
+        "nano": 2,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/secret-key-ref-wrong/out"
+    },
+    {
+      "fault_id": "secret-too-short",
+      "category": "secret",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "crashloopbackoff",
+        "deployment_rollback_needed",
+        "secret_rotation",
+        "secret_too_short",
+        "secret_validation"
+      ],
+      "expected_labels": [
+        "secret_value",
+        "secret_config",
+        "validation",
+        "crash_loop"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 34124.4552049975,
+      "case_wall_ms": 119848.90295499645,
+      "report_title": "checkout pod crashloopbackoff due to SECRET_KEY too short (5 chars) violating 32-char minimum",
+      "cost_usd_by_tier": {
+        "nano": 0.0007992,
+        "ultra": 0.032161999999999996,
+        "tavily": null,
+        "super": 0.0041226
+      },
+      "tokens_by_tier": {
+        "nano": 11457,
+        "ultra": 26552,
+        "tavily": 0,
+        "super": 12000
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/secret-too-short/out"
+    },
+    {
+      "fault_id": "service-port-mismatch",
+      "category": "networking",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "false_alert",
+        "probe_healthy",
+        "rolling_update",
+        "termination_timestamp_corruption"
+      ],
+      "expected_labels": [
+        "port_config",
+        "service_port",
+        "target_port",
+        "traffic_routing"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 116993.01162600023,
+      "case_wall_ms": 154795.16960299952,
+      "report_title": "Checkout pod termination timestamp corruption during rolling update triggers false stuck alert",
+      "cost_usd_by_tier": {
+        "nano": 0.0008512799999999999,
+        "ultra": 0.053001999999999994,
+        "tavily": null,
+        "super": 0.004873499999999999
+      },
+      "tokens_by_tier": {
+        "nano": 11083,
+        "ultra": 32922,
+        "tavily": 0,
+        "super": 12289
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/service-port-mismatch/out"
+    },
+    {
+      "fault_id": "service-selector-mismatch",
+      "category": "networking",
+      "status": "pr-prepared",
+      "error": null,
+      "reused": false,
+      "root_cause_correct": false,
+      "predicted_labels": [
+        "deployment_controller",
+        "graceful_termination",
+        "normal_behavior",
+        "rolling_update"
+      ],
+      "expected_labels": [
+        "service_selector",
+        "selector_mismatch",
+        "traffic_routing",
+        "no_endpoints"
+      ],
+      "verify_passed": true,
+      "verify_attempts": 1,
+      "time_to_pr_ready_ms": 39480.672532001336,
+      "case_wall_ms": 77691.76831600635,
+      "report_title": "Checkout pod terminated during normal rolling update deployment",
+      "cost_usd_by_tier": {
+        "nano": 0.00100518,
+        "ultra": 0.035196,
+        "tavily": null,
+        "super": 0.0039612
+      },
+      "tokens_by_tier": {
+        "nano": 11749,
+        "ultra": 27076,
+        "tavily": 0,
+        "super": 11304
+      },
+      "calls_by_tier": {
+        "nano": 1,
+        "ultra": 2,
+        "tavily": 3,
+        "super": 1
+      },
+      "out_dir": "/home/azureuser/mender/runs/eval-full/cases/service-selector-mismatch/out"
+    }
+  ],
+  "summary": {
+    "faults_total": 23,
+    "cases_run": 23,
+    "root_cause_correct": 9,
+    "root_cause_accuracy": 0.391304347826087,
+    "fix_passed": 20,
+    "fix_pass_rate": 0.8695652173913043,
+    "time_to_pr_ready_ms_median": 33800.31730199698,
+    "time_to_pr_ready_n": 20,
+    "cost_usd_by_tier": {
+      "nano": 0.02334606,
+      "super": 0.1901736,
+      "tavily": null,
+      "ultra": 0.823931
+    },
+    "tokens_by_tier": {
+      "nano": 307405,
+      "super": 456320,
+      "tavily": 0,
+      "ultra": 663539
+    },
+    "calls_by_tier": {
+      "nano": 25,
+      "super": 30,
+      "tavily": 69,
+      "ultra": 46
+    },
+    "failures": [
+      {
+        "fault_id": "cpu-limit-missing",
+        "status": "verify-failed",
+        "error": ""
+      },
+      {
+        "fault_id": "migration-missing-column",
+        "status": "error",
+        "error": "PatchError: patch path outside allowed set: demo/manifests/deploy.yaml"
+      },
+      {
+        "fault_id": "parse-amount-bug",
+        "status": "error",
+        "error": "PatchError: patch path outside allowed set: demo/manifests/deploy.yaml"
+      }
+    ]
+  }
+}

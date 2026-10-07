@@ -1,0 +1,44 @@
+{
+  "fault_id": "service-port-mismatch",
+  "category": "networking",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "false_alert",
+    "probe_healthy",
+    "rolling_update",
+    "termination_timestamp_corruption"
+  ],
+  "expected_labels": [
+    "port_config",
+    "service_port",
+    "target_port",
+    "traffic_routing"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 116993.01162600023,
+  "case_wall_ms": 154795.16960299952,
+  "report_title": "Checkout pod termination timestamp corruption during rolling update triggers false stuck alert",
+  "cost_usd_by_tier": {
+    "nano": 0.0008512799999999999,
+    "ultra": 0.053001999999999994,
+    "tavily": null,
+    "super": 0.004873499999999999
+  },
+  "tokens_by_tier": {
+    "nano": 11083,
+    "ultra": 32922,
+    "tavily": 0,
+    "super": 12289
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/service-port-mismatch/out"
+}

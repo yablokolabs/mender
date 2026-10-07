@@ -1,0 +1,39 @@
+{
+  "fault_id": "parse-amount-bug",
+  "category": "app",
+  "status": "error",
+  "error": "PatchError: patch path outside allowed set: demo/manifests/deploy.yaml",
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [],
+  "expected_labels": [
+    "code_bug",
+    "logic_error",
+    "parse_error",
+    "wrong_amount"
+  ],
+  "verify_passed": false,
+  "verify_attempts": null,
+  "time_to_pr_ready_ms": null,
+  "case_wall_ms": 98967.0413950007,
+  "report_title": "",
+  "cost_usd_by_tier": {
+    "nano": 0.0010656,
+    "ultra": 0.045144000000000004,
+    "tavily": null,
+    "super": 0.0230718
+  },
+  "tokens_by_tier": {
+    "nano": 14235,
+    "ultra": 34186,
+    "tavily": 0,
+    "super": 47566
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 2
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/parse-amount-bug/out"
+}

@@ -1,0 +1,40 @@
+{
+  "fault_id": "cpu-limit-missing",
+  "category": "resources",
+  "status": "verify-failed",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "probe_config"
+  ],
+  "expected_labels": [
+    "resource_limit",
+    "missing_limit",
+    "resources"
+  ],
+  "verify_passed": false,
+  "verify_attempts": 4,
+  "time_to_pr_ready_ms": null,
+  "case_wall_ms": 196464.54038299999,
+  "report_title": "Checkout pods stuck in Terminating state during rolling update",
+  "cost_usd_by_tier": {
+    "nano": 0.0017124599999999999,
+    "ultra": 0.05190000000000001,
+    "tavily": null,
+    "super": 0.0352431
+  },
+  "tokens_by_tier": {
+    "nano": 19175,
+    "ultra": 40524,
+    "tavily": 0,
+    "super": 79525
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 4
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/cpu-limit-missing/out"
+}

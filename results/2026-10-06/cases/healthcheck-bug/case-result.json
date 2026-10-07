@@ -1,0 +1,45 @@
+{
+  "fault_id": "healthcheck-bug",
+  "category": "app",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "bad_build",
+    "health_check_failure",
+    "mutable_image_tag",
+    "oomkilled",
+    "rollout_issue"
+  ],
+  "expected_labels": [
+    "code_bug",
+    "healthcheck",
+    "probe_failure",
+    "readiness_probe"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 78043.8044879993,
+  "case_wall_ms": 166381.66746600473,
+  "report_title": "Checkout pod crash due to mutable image tag deploying defective build",
+  "cost_usd_by_tier": {
+    "nano": 0.0009734399999999999,
+    "ultra": 0.035223,
+    "tavily": null,
+    "super": 0.008535599999999999
+  },
+  "tokens_by_tier": {
+    "nano": 12312,
+    "ultra": 27957,
+    "tavily": 0,
+    "super": 17862
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/healthcheck-bug/out"
+}

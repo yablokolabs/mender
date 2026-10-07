@@ -1,0 +1,44 @@
+{
+  "fault_id": "cpu-request-too-high",
+  "category": "scheduling",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "cpu_request_excessive",
+    "insufficient_cpu",
+    "manifest_misconfig",
+    "scheduling_failure"
+  ],
+  "expected_labels": [
+    "resource_request",
+    "scheduling",
+    "pending",
+    "insufficient_cpu"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 29273.7860979978,
+  "case_wall_ms": 115009.64903600106,
+  "report_title": "Checkout pod stuck Pending due to excessive CPU request (32 cores) exceeding single-node capacity",
+  "cost_usd_by_tier": {
+    "nano": 0.00083694,
+    "ultra": 0.028286,
+    "tavily": null,
+    "super": 0.0043314
+  },
+  "tokens_by_tier": {
+    "nano": 11231,
+    "ultra": 25012,
+    "tavily": 0,
+    "super": 12062
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/cpu-request-too-high/out"
+}

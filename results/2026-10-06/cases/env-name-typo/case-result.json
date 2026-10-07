@@ -1,0 +1,45 @@
+{
+  "fault_id": "env-name-typo",
+  "category": "config",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "config_map_key_ref",
+    "crashloopbackoff",
+    "deployment_manifest_bug",
+    "env_var_typo",
+    "missing_env_var"
+  ],
+  "expected_labels": [
+    "env_config",
+    "missing_env",
+    "env_var",
+    "crash_loop"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 30066.073059999326,
+  "case_wall_ms": 115833.8440209991,
+  "report_title": "checkout pod CrashLoopBackOff due to DB_HOSTS vs DB_HOST env var name mismatch",
+  "cost_usd_by_tier": {
+    "nano": 0.00082134,
+    "ultra": 0.029121,
+    "tavily": null,
+    "super": 0.004446
+  },
+  "tokens_by_tier": {
+    "nano": 11565,
+    "ultra": 26057,
+    "tavily": 0,
+    "super": 12532
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/env-name-typo/out"
+}

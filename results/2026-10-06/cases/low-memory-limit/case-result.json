@@ -1,0 +1,45 @@
+{
+  "fault_id": "low-memory-limit",
+  "category": "resources",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": true,
+  "predicted_labels": [
+    "cache_sizing",
+    "deployment_mismatch",
+    "exit_code_137",
+    "memory_limit",
+    "oomkilled"
+  ],
+  "expected_labels": [
+    "oomkilled",
+    "memory_limit",
+    "memory_config",
+    "resource_limit"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 24978.605967997282,
+  "case_wall_ms": 110696.0424390054,
+  "report_title": "checkout pod OOMKilled due to 64Mi memory limit below 96Mi startup cache requirement",
+  "cost_usd_by_tier": {
+    "nano": 0.0008210399999999999,
+    "ultra": 0.029324999999999997,
+    "tavily": null,
+    "super": 0.0045618
+  },
+  "tokens_by_tier": {
+    "nano": 11686,
+    "ultra": 26429,
+    "tavily": 0,
+    "super": 12794
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/low-memory-limit/out"
+}

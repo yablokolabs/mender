@@ -1,0 +1,45 @@
+{
+  "passed": false,
+  "attempts": 4,
+  "command": [
+    "python3",
+    "demo/app/check.py"
+  ],
+  "changed_files": [
+    "demo/manifests/deploy.yaml"
+  ],
+  "attempt_log": [
+    {
+      "attempt": 1,
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 660.1882549948641,
+      "passed": false,
+      "output_tail": "PASS check_memory_limit\nFAIL check_cpu_limit_present: AssertionError: limits.cpu missing\nPASS check_cpu_request_sane\nPASS check_replicas\nPASS check_image_tag\nPASS check_readiness_probe\nPASS check_liveness_probe\nPASS check_container_port\nPASS check_secret_env_ref\nPASS check_db_env_ref\nPASS check_config_mount\nPASS check_selector_match\nPASS check_service_selector_and_ports\nPASS check_configmap_values\nPASS check_secret_value\nPASS check_migration_executes\nPASS check_migration_schema\nPASS check_service_parses_amounts\nPASS check_service_healthcheck_logic\nPASS check_service_env_validation\nPASS check_service_config_validation\n20/21 checks passed"
+    },
+    {
+      "attempt": 2,
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 540.3261989995372,
+      "passed": false,
+      "output_tail": "FAIL check_memory_limit: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_cpu_limit_present: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_cpu_request_sane: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_replicas: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_image_tag: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_readiness_probe: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_liveness_probe: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_container_port: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_secret_env_ref: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_db_env_ref: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_config_mount: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_selector_match: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_service_selector_and_ports: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 55, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nPASS check_configmap_values\nPASS check_secret_value\nPASS check_migration_executes\nPASS check_migration_schema\nPASS check_service_parses_amounts\nPASS check_service_healthcheck_logic\nPASS check_service_env_validation\nPASS check_service_config_validation\n8/21 checks passed"
+    },
+    {
+      "attempt": 3,
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 634.377221998875,
+      "passed": false,
+      "output_tail": "PASS check_memory_limit\nFAIL check_cpu_limit_present: AssertionError: limits.cpu missing\nPASS check_cpu_request_sane\nPASS check_replicas\nPASS check_image_tag\nPASS check_readiness_probe\nPASS check_liveness_probe\nPASS check_container_port\nPASS check_secret_env_ref\nPASS check_db_env_ref\nPASS check_config_mount\nPASS check_selector_match\nPASS check_service_selector_and_ports\nPASS check_configmap_values\nPASS check_secret_value\nPASS check_migration_executes\nPASS check_migration_schema\nPASS check_service_parses_amounts\nPASS check_service_healthcheck_logic\nPASS check_service_env_validation\nPASS check_service_config_validation\n20/21 checks passed"
+    },
+    {
+      "attempt": 4,
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 717.3195599971223,
+      "passed": false,
+      "output_tail": "FAIL check_memory_limit: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_cpu_limit_present: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_cpu_request_sane: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_replicas: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_image_tag: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_readiness_probe: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_liveness_probe: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_container_port: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_secret_env_ref: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_db_env_ref: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_config_mount: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_selector_match: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nFAIL check_service_selector_and_ports: ScannerError: mapping values are not allowed here\n  in \"<unicode string>\", line 57, column 52:\n     ... econds: 10          volumeMounts:\n                                         ^\nPASS check_configmap_values\nPASS check_secret_value\nPASS check_migration_executes\nPASS check_migration_schema\nPASS check_service_parses_amounts\nPASS check_service_healthcheck_logic\nPASS check_service_env_validation\nPASS check_service_config_validation\n8/21 checks passed"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "fault_id": "secret-too-short",
+  "category": "secret",
+  "status": "pr-prepared",
+  "error": null,
+  "reused": false,
+  "root_cause_correct": false,
+  "predicted_labels": [
+    "crashloopbackoff",
+    "deployment_rollback_needed",
+    "secret_rotation",
+    "secret_too_short",
+    "secret_validation"
+  ],
+  "expected_labels": [
+    "secret_value",
+    "secret_config",
+    "validation",
+    "crash_loop"
+  ],
+  "verify_passed": true,
+  "verify_attempts": 1,
+  "time_to_pr_ready_ms": 34124.4552049975,
+  "case_wall_ms": 119848.90295499645,
+  "report_title": "checkout pod crashloopbackoff due to SECRET_KEY too short (5 chars) violating 32-char minimum",
+  "cost_usd_by_tier": {
+    "nano": 0.0007992,
+    "ultra": 0.032161999999999996,
+    "tavily": null,
+    "super": 0.0041226
+  },
+  "tokens_by_tier": {
+    "nano": 11457,
+    "ultra": 26552,
+    "tavily": 0,
+    "super": 12000
+  },
+  "calls_by_tier": {
+    "nano": 1,
+    "ultra": 2,
+    "tavily": 3,
+    "super": 1
+  },
+  "out_dir": "/home/azureuser/mender/runs/eval-full/cases/secret-too-short/out"
+}
